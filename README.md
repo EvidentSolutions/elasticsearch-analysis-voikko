@@ -1,0 +1,76 @@
+Voikko Analysis for ElasticSearch
+=================================
+
+The Voikko Analysis plugin provides Finnish language analysis using [Voikko](http://voikko.puimula.org/).
+
+Installing
+----------
+
+The plugin needs `libvoikko` shared library to work. Details of installing the library varies
+based on operating system. In Debian based systems `apt-get install libvoikko1` should work.
+
+Next, you'll need to download [morpho dictionary](http://www.puimula.org/htp/testing/voikko-snapshot/dict-morpho.zip).
+Unzip this into Voikko's dictionary directory (e.g. `/usr/lib/voikko` in Debian) or into a directory you specify with
+`dictionaryPath` configuration property.
+
+Finally, to install the plugin, run: `bin/plugin --install fi.evident.elasticsearch/elasticsearch-analysis-voikko/0.1-SNAPSHOT`.
+
+    -----------------------------------------------
+    | Voikko Analysis Plugin   | ElasticSearch    |
+    -----------------------------------------------
+    | 0.1-SNAPSHOT    (master) | 0.90.3 -> master |
+    -----------------------------------------------
+
+Configuring
+-----------
+
+Include `voikko` filter in your analyzer, for example:
+
+    :::json
+    {
+      "index": {
+        "analysis": {
+          "analyzer": {
+            "default": {
+              "tokenizer": "standard",
+              "filter": ["asciifolding", "lowercase", "voikkoFilter"]
+            }
+          },
+          "filter": {
+            "voikkoFilter": {
+              "type": "voikko"
+            }
+          }
+        }
+      }
+    }
+
+You can use the following filter options to customize the behaviour of the filter:
+
+    -----------------------------------------------------------------------------------------
+    | Parameter       | Default value    | Description                                      |
+    -----------------------------------------------------------------------------------------
+    | language        | fi_FI            | Language to use                                  |
+    -----------------------------------------------------------------------------------------
+    | dictionaryPath  | system dependent | path to voikko dictionaries                      |
+    -----------------------------------------------------------------------------------------
+    | analyzeAll      | false            | Use all analysis possibilities or just the first |
+    -----------------------------------------------------------------------------------------
+    | minimumWordSize | 3                | minimum length of words to analyze               |
+    -----------------------------------------------------------------------------------------
+    | maximumWordSize | 100              | maximum length of words to analyze               |
+    -----------------------------------------------------------------------------------------
+    | libraryPath     | system dependent | path to directory containing libvoikko           |
+    -----------------------------------------------------------------------------------------
+
+Development
+-----------
+
+To run the tests, you need to specify `voikko.home` system property which should point to
+a directory containing libvoikko shared library and subdirectory `dicts` which contains
+the [morpho dictionary](http://www.puimula.org/htp/testing/voikko-snapshot/dict-morpho.zip).
+
+License
+-------
+
+This library is released under the LGPL, version 2.1 or later.
