@@ -38,16 +38,21 @@ public final class VoikkoTokenFilterFactory extends AbstractTokenFilterFactory {
     public VoikkoTokenFilterFactory(Index index, @IndexSettings Settings indexSettings, @Assisted String name, @Assisted Settings settings) {
         super(index, indexSettings, name, settings);
 
+        cfg.analyzeAll = settings.getAsBoolean("analyzeAll", cfg.analyzeAll);
+        cfg.minimumWordSize = settings.getAsInt("minimumWordSize", cfg.minimumWordSize);
+        cfg.maximumWordSize = settings.getAsInt("maximumWordSize", cfg.maximumWordSize);
+
         String language = settings.get("language", "fi_FI");
         String dictionaryPath = settings.get("dictionaryPath");
 
         for (String dir : settings.getAsArray("libraryPath"))
             Voikko.addLibraryPath(dir);
 
-        voikko = new Voikko(language, dictionaryPath);
-        cfg.analyzeAll = settings.getAsBoolean("analyzeAll", cfg.analyzeAll);
-        cfg.minimumWordSize = settings.getAsInt("minimumWordSize", cfg.minimumWordSize);
-        cfg.maximumWordSize = settings.getAsInt("maximumWordSize", cfg.maximumWordSize);
+        try {
+            voikko = new Voikko(language, dictionaryPath);
+        } catch (UnsatisfiedLinkError e) {
+            throw new VoikkoNativeLibraryNotFoundException(e);
+        }
     }
 
     @Override
