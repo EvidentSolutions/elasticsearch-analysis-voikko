@@ -62,9 +62,9 @@
             <version>3.0.9</version>
         </dependency>
         <dependency>
-            <groupId>org.puimula</groupId>
+            <groupId>org.puimula.voikko</groupId>
             <artifactId>libvoikko</artifactId>
-            <version>3.5</version>
+            <version>3.6.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
