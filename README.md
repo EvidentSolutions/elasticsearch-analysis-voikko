@@ -23,6 +23,8 @@ Finally, to install the plugin, run: `bin/plugin --install fi.evident.elasticsea
     | 0.1.0                    | 0.90.3           |
     -----------------------------------------------
 
+[![Build Status](https://drone.io/bitbucket.org/evidentsolutions/elasticsearch-analysis-voikko/status.png)](https://drone.io/bitbucket.org/evidentsolutions/elasticsearch-analysis-voikko/latest)
+
 Configuring
 -----------
 
