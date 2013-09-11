@@ -70,7 +70,7 @@ final class VoikkoTokenFilter extends TokenFilter {
 
         List<Analysis> analyzationResults = analyze(charTermAttribute);
         if (analyzationResults.isEmpty())
-            return false;
+            return true;
 
         String firstBaseForm = baseForm(analyzationResults.get(0));
         if (firstBaseForm != null)

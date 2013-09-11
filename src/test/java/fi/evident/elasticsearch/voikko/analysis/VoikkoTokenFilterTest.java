@@ -83,6 +83,16 @@ public class VoikkoTokenFilterTest {
     }
 
     @Test
+    public void unknownWord() throws Exception {
+        assertTokens("Mitenkä foobarbaz edellinen sana tunnistetaan?",
+                token("Mitenkä", "miten", 1),
+                token("foobarbaz", "foobarbaz", 1),
+                token("edellinen", "edellinen", 1),
+                token("sana", "sana", 1),
+                token("tunnistetaan", "tunnistaa", 1));
+    }
+
+    @Test
     public void allVariations() throws Exception {
         settings.put("index.analysis.filter.myFilter.analyzeAll", true);
 
