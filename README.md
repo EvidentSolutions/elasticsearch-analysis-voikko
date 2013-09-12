@@ -66,6 +66,8 @@ You can use the following filter options to customize the behaviour of the filte
     -----------------------------------------------------------------------------------------
     | libraryPath     | system dependent | path to directory containing libvoikko           |
     -----------------------------------------------------------------------------------------
+    | poolMaxSize     | 10               | maximum amount of Voikko-instances to pool       |
+    -----------------------------------------------------------------------------------------
 
 Development
 -----------

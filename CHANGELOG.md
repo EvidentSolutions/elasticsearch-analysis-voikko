@@ -1,3 +1,7 @@
+## 0.1.2 (yyyy-mm-dd)
+
+  - Pooling Voikko-instances for better multi-threaded performance.
+
 ## 0.1.1 (2013-09-11)
 
   - Handle unknown tokens correctly.

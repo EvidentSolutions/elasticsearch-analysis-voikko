@@ -18,6 +18,7 @@
 package fi.evident.elasticsearch.voikko.analysis;
 
 import org.apache.lucene.analysis.TokenStream;
+import org.elasticsearch.common.component.CloseableComponent;
 import org.elasticsearch.common.inject.Inject;
 import org.elasticsearch.common.inject.assistedinject.Assisted;
 import org.elasticsearch.common.settings.Settings;
@@ -28,9 +29,9 @@ import org.elasticsearch.index.settings.IndexSettings;
 import org.puimula.libvoikko.Voikko;
 
 @AnalysisSettingsRequired
-public final class VoikkoTokenFilterFactory extends AbstractTokenFilterFactory {
+public final class VoikkoTokenFilterFactory extends AbstractTokenFilterFactory implements CloseableComponent {
 
-    private final Voikko voikko;
+    private final VoikkoPool voikkoPool;
 
     private final VoikkoTokenFilterConfiguration cfg = new VoikkoTokenFilterConfiguration();
 
@@ -48,15 +49,21 @@ public final class VoikkoTokenFilterFactory extends AbstractTokenFilterFactory {
         for (String dir : settings.getAsArray("libraryPath"))
             Voikko.addLibraryPath(dir);
 
-        try {
-            voikko = new Voikko(language, dictionaryPath);
-        } catch (UnsatisfiedLinkError e) {
-            throw new VoikkoNativeLibraryNotFoundException(e);
-        }
+        voikkoPool = new VoikkoPool(language, dictionaryPath);
+        voikkoPool.setMaxSize(settings.getAsInt("poolMaxSize", 10));
+    }
+
+    @Override
+    public void close() {
+        voikkoPool.close();
     }
 
     @Override
     public TokenStream create(TokenStream tokenStream) {
-        return new VoikkoTokenFilter(tokenStream, voikko, cfg);
+        try {
+            return new VoikkoTokenFilter(tokenStream, voikkoPool, cfg);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

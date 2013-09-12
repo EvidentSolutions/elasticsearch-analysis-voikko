@@ -33,6 +33,7 @@ import java.util.regex.Pattern;
 final class VoikkoTokenFilter extends TokenFilter {
 
     private State current;
+    private final VoikkoPool pool;
     private final Voikko voikko;
     private final VoikkoTokenFilterConfiguration cfg;
 
@@ -44,10 +45,17 @@ final class VoikkoTokenFilter extends TokenFilter {
 
     private static final Pattern VALID_WORD_PATTERN = Pattern.compile("[a-zA-ZåäöÅÄÖ]+");
 
-    VoikkoTokenFilter(TokenStream input, Voikko voikko, VoikkoTokenFilterConfiguration cfg) {
+    VoikkoTokenFilter(TokenStream input, VoikkoPool pool, VoikkoTokenFilterConfiguration cfg) throws InterruptedException {
         super(input);
-        this.voikko = voikko;
+        this.pool = pool;
+        this.voikko = pool.takeVoikko();
         this.cfg = cfg;
+    }
+
+    @Override
+    public void close() throws IOException {
+        super.close();
+        pool.release(voikko);
     }
 
     @Override
