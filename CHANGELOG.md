@@ -1,4 +1,4 @@
-## 0.1.2 (yyyy-mm-dd)
+## 0.1.2 (2013-09-12)
 
   - Pooling Voikko-instances for better multi-threaded performance.
 
