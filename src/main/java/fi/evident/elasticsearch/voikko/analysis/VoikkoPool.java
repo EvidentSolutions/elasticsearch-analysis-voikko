@@ -27,7 +27,7 @@ final class VoikkoPool {
     private final String language;
     private final String dictionaryPath;
     private int maxSize = 10;
-    private final List<Voikko> allInstances = new ArrayList<Voikko>();
+    private int size = 0;
     private final List<Voikko> freeInstances = new ArrayList<Voikko>();
     private boolean closed = false;
 
@@ -44,9 +44,9 @@ final class VoikkoPool {
             if (!freeInstances.isEmpty())
                 return freeInstances.remove(freeInstances.size() - 1);
 
-            if (allInstances.size() < maxSize) {
+            if (size < maxSize) {
                 Voikko voikko = createNewInstance();
-                allInstances.add(voikko);
+                size++;
                 return voikko;
             }
 
@@ -57,16 +57,24 @@ final class VoikkoPool {
     public synchronized void release(Voikko voikko) {
         if (voikko == null) throw new IllegalArgumentException("null voikko");
 
-        freeInstances.add(voikko);
-
-        notifyAll();
+        if (closed) {
+            voikko.terminate();
+        } else {
+            freeInstances.add(voikko);
+            notifyAll();
+        }
     }
 
     public synchronized void close() {
+        if (closed)
+            return;
+
         closed = true;
 
-        for (Voikko voikko : allInstances)
+        for (Voikko voikko : freeInstances)
             voikko.terminate();
+
+        freeInstances.clear();
 
         notifyAll();
     }
