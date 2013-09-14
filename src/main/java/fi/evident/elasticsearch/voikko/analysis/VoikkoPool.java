@@ -61,7 +61,7 @@ final class VoikkoPool {
             voikko.terminate();
         } else {
             freeInstances.add(voikko);
-            notifyAll();
+            notify();
         }
     }
 
