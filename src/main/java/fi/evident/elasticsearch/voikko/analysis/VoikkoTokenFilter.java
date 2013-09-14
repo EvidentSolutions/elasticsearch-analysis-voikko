@@ -65,20 +65,23 @@ final class VoikkoTokenFilter extends TokenFilter {
             return true;
         }
 
-        if (input.incrementToken())
-            return analyzeToken();
+        if (input.incrementToken()) {
+            analyzeToken();
+            return true;
+        }
 
         return false;
     }
 
-    private boolean analyzeToken() {
-        current = captureState();
+    private void analyzeToken() {
         if (!isCandidateForAnalyzation(charTermAttribute))
-            return true;
+            return;
 
         List<Analysis> analyzationResults = analyze(charTermAttribute);
         if (analyzationResults.isEmpty())
-            return true;
+            return;
+
+        current = captureState();
 
         String firstBaseForm = baseForm(analyzationResults.get(0));
         if (firstBaseForm != null)
@@ -91,8 +94,6 @@ final class VoikkoTokenFilter extends TokenFilter {
                     alternatives.add(baseForm);
             }
         }
-
-        return true;
     }
 
     private List<Analysis> analyze(CharSequence wordSeq) {
