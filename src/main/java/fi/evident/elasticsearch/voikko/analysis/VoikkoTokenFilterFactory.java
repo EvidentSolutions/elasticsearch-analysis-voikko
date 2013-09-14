@@ -33,6 +33,7 @@ public final class VoikkoTokenFilterFactory extends AbstractTokenFilterFactory i
 
     private final VoikkoPool voikkoPool;
 
+    private final AnalysisCache analysisCache = new AnalysisCache();
     private final VoikkoTokenFilterConfiguration cfg = new VoikkoTokenFilterConfiguration();
 
     @Inject
@@ -61,7 +62,7 @@ public final class VoikkoTokenFilterFactory extends AbstractTokenFilterFactory i
     @Override
     public TokenStream create(TokenStream tokenStream) {
         try {
-            return new VoikkoTokenFilter(tokenStream, voikkoPool, cfg);
+            return new VoikkoTokenFilter(tokenStream, voikkoPool, analysisCache, cfg);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

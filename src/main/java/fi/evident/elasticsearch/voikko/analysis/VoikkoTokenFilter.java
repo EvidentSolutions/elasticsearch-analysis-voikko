@@ -41,14 +41,15 @@ final class VoikkoTokenFilter extends TokenFilter {
     private final PositionIncrementAttribute positionIncrementAttribute = addAttribute(PositionIncrementAttribute.class);
 
     private final Deque<String> alternatives = new ArrayDeque<String>();
-    private final LRUCache<String, List<Analysis>> analyzationCache = new LRUCache<String, List<Analysis>>(1024);
+    private final AnalysisCache analysisCache;
 
     private static final Pattern VALID_WORD_PATTERN = Pattern.compile("[a-zA-ZåäöÅÄÖ]+");
 
-    VoikkoTokenFilter(TokenStream input, VoikkoPool pool, VoikkoTokenFilterConfiguration cfg) throws InterruptedException {
+    VoikkoTokenFilter(TokenStream input, VoikkoPool pool, AnalysisCache analysisCache, VoikkoTokenFilterConfiguration cfg) throws InterruptedException {
         super(input);
         this.pool = pool;
         this.voikko = pool.takeVoikko();
+        this.analysisCache = analysisCache;
         this.cfg = cfg;
     }
 
@@ -98,10 +99,10 @@ final class VoikkoTokenFilter extends TokenFilter {
 
     private List<Analysis> analyze(CharSequence wordSeq) {
         String word = wordSeq.toString();
-        List<Analysis> result = analyzationCache.get(word);
+        List<Analysis> result = analysisCache.get(word);
         if (result == null) {
             result = voikko.analyze(word);
-            analyzationCache.put(word, result);
+            analysisCache.put(word, result);
         }
         return result;
     }
