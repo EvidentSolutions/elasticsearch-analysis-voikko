@@ -11,7 +11,7 @@
     <name>elasticsearch-analysis-voikko</name>
     <groupId>fi.evident.elasticsearch</groupId>
     <artifactId>elasticsearch-analysis-voikko</artifactId>
-    <version>0.1.3-SNAPSHOT</version>
+    <version>0.1.3</version>
     <packaging>jar</packaging>
     <description>Finnish language analysis for ElasticSearch using Voikko</description>
     <inceptionYear>2013</inceptionYear>
@@ -214,6 +214,6 @@
         <url>https://bitbucket.org/evidentsolutions/elasticsearch-analysis-voikko</url>
         <connection>scm:git:https://bitbucket.org/evidentsolutions/elasticsearch-analysis-voikko.git</connection>
         <developerConnection>scm:git:ssh://git@bitbucket.org/evidentsolutions/elasticsearch-analysis-voikko.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v0.1.3</tag>
     </scm>
 </project>
