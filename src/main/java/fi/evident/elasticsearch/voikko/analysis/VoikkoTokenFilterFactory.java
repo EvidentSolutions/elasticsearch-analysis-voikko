@@ -33,7 +33,7 @@ public final class VoikkoTokenFilterFactory extends AbstractTokenFilterFactory i
 
     private final VoikkoPool voikkoPool;
 
-    private final AnalysisCache analysisCache = new AnalysisCache();
+    private final AnalysisCache analysisCache;
     private final VoikkoTokenFilterConfiguration cfg = new VoikkoTokenFilterConfiguration();
 
     @Inject
@@ -43,6 +43,8 @@ public final class VoikkoTokenFilterFactory extends AbstractTokenFilterFactory i
         cfg.analyzeAll = settings.getAsBoolean("analyzeAll", cfg.analyzeAll);
         cfg.minimumWordSize = settings.getAsInt("minimumWordSize", cfg.minimumWordSize);
         cfg.maximumWordSize = settings.getAsInt("maximumWordSize", cfg.maximumWordSize);
+
+        analysisCache = new AnalysisCache(settings.getAsInt("analysisCacheSize", 1024));
 
         String language = settings.get("language", "fi_FI");
         String dictionaryPath = settings.get("dictionaryPath");

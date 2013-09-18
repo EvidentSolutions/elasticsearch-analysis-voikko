@@ -15,14 +15,14 @@ Next, you'll need to download [morpho dictionary](http://www.puimula.org/htp/tes
 Unzip this into Voikko's dictionary directory (e.g. `/usr/lib/voikko` in Debian) or into a directory you specify with
 `dictionaryPath` configuration property.
 
-Finally, to install the plugin, run: `bin/plugin --install fi.evident.elasticsearch/elasticsearch-analysis-voikko/0.1.2`.
+Finally, to install the plugin, run: `bin/plugin --install fi.evident.elasticsearch/elasticsearch-analysis-voikko/0.1.3`.
 
     -----------------------------------------------
     | Voikko Analysis Plugin   | ElasticSearch    |
     -----------------------------------------------
     | 0.1-SNAPSHOT    (master) | 0.90.3 -> master |
     |----------------------------------------------
-    | 0.1.2                    | 0.90.3           |
+    | 0.1.3                    | 0.90.3           |
     |----------------------------------------------
 
 Configuring
@@ -51,23 +51,25 @@ Include `voikko` filter in your analyzer, for example:
 
 You can use the following filter options to customize the behaviour of the filter:
 
-    -----------------------------------------------------------------------------------------
-    | Parameter       | Default value    | Description                                      |
-    -----------------------------------------------------------------------------------------
-    | language        | fi_FI            | Language to use                                  |
-    -----------------------------------------------------------------------------------------
-    | dictionaryPath  | system dependent | path to voikko dictionaries                      |
-    -----------------------------------------------------------------------------------------
-    | analyzeAll      | false            | Use all analysis possibilities or just the first |
-    -----------------------------------------------------------------------------------------
-    | minimumWordSize | 3                | minimum length of words to analyze               |
-    -----------------------------------------------------------------------------------------
-    | maximumWordSize | 100              | maximum length of words to analyze               |
-    -----------------------------------------------------------------------------------------
-    | libraryPath     | system dependent | path to directory containing libvoikko           |
-    -----------------------------------------------------------------------------------------
-    | poolMaxSize     | 10               | maximum amount of Voikko-instances to pool       |
-    -----------------------------------------------------------------------------------------
+    -------------------------------------------------------------------------------------------
+    | Parameter         | Default value    | Description                                      |
+    -------------------------------------------------------------------------------------------
+    | language          | fi_FI            | Language to use                                  |
+    -------------------------------------------------------------------------------------------
+    | dictionaryPath    | system dependent | path to voikko dictionaries                      |
+    -------------------------------------------------------------------------------------------
+    | analyzeAll        | false            | Use all analysis possibilities or just the first |
+    -------------------------------------------------------------------------------------------
+    | minimumWordSize   | 3                | minimum length of words to analyze               |
+    -------------------------------------------------------------------------------------------
+    | maximumWordSize   | 100              | maximum length of words to analyze               |
+    -------------------------------------------------------------------------------------------
+    | libraryPath       | system dependent | path to directory containing libvoikko           |
+    -------------------------------------------------------------------------------------------
+    | poolMaxSize       | 10               | maximum amount of Voikko-instances to pool       |
+    -------------------------------------------------------------------------------------------
+    | analysisCacheSize | 1024             | number of analysis results to cache              |
+    -------------------------------------------------------------------------------------------
 
 Development
 -----------
