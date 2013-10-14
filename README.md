@@ -20,7 +20,7 @@ Finally, to install the plugin, run: `bin/plugin --install fi.evident.elasticsea
     -----------------------------------------------
     | Voikko Analysis Plugin   | ElasticSearch    |
     -----------------------------------------------
-    | 0.1-SNAPSHOT    (master) | 0.90.3 -> master |
+    | 0.1-SNAPSHOT    (master) | 0.90.5 -> master |
     |----------------------------------------------
     | 0.1.3                    | 0.90.3           |
     |----------------------------------------------
