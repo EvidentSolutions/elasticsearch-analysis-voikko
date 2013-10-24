@@ -83,9 +83,7 @@ final class VoikkoTokenFilter extends TokenFilter {
         if (baseForms.isEmpty())
             return;
 
-        String firstBaseForm = baseForms.get(0);
-        if (firstBaseForm != null)
-            charTermAttribute.setEmpty().append(firstBaseForm);
+        charTermAttribute.setEmpty().append(baseForms.get(0));
 
         if (cfg.analyzeAll && baseForms.size() > 1) {
             current = captureState();
