@@ -26,6 +26,7 @@ import org.puimula.libvoikko.Voikko;
 
 import java.io.IOException;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -78,33 +79,43 @@ final class VoikkoTokenFilter extends TokenFilter {
         if (!isCandidateForAnalyzation(charTermAttribute))
             return;
 
-        List<Analysis> analyzationResults = analyze(charTermAttribute);
-        if (analyzationResults.isEmpty())
+        List<String> baseForms = analyze(charTermAttribute);
+        if (baseForms.isEmpty())
             return;
 
         current = captureState();
 
-        String firstBaseForm = baseForm(analyzationResults.get(0));
+        String firstBaseForm = baseForms.get(0);
         if (firstBaseForm != null)
             charTermAttribute.setEmpty().append(firstBaseForm);
 
         if (cfg.analyzeAll) {
-            for (Analysis analysis : analyzationResults.subList(1, analyzationResults.size())) {
-                String baseForm = baseForm(analysis);
-                if (baseForm != null)
-                    alternatives.add(baseForm);
+            for (String baseForm : baseForms.subList(1, baseForms.size())) {
+                alternatives.add(baseForm);
             }
         }
     }
 
-    private List<Analysis> analyze(CharSequence wordSeq) {
+    private List<String> analyze(CharSequence wordSeq) {
         String word = wordSeq.toString();
-        List<Analysis> result = analysisCache.get(word);
+        List<String> result = analysisCache.get(word);
         if (result == null) {
-            result = voikko.analyze(word);
+            result = analyzeUncached(word);
             analysisCache.put(word, result);
         }
         return result;
+    }
+
+    private List<String> analyzeUncached(String word) {
+        List<Analysis> results = voikko.analyze(word);
+        List<String> baseForms = new ArrayList<String>(results.size());
+
+        for (Analysis result : results) {
+            String baseForm = result.get("BASEFORM");
+            if (baseForm != null)
+                baseForms.add(baseForm);
+        }
+        return baseForms;
     }
 
     private void outputAlternative(String token) {
@@ -116,9 +127,5 @@ final class VoikkoTokenFilter extends TokenFilter {
 
     private boolean isCandidateForAnalyzation(CharSequence word) {
         return word.length() >= cfg.minimumWordSize && word.length() <= cfg.maximumWordSize && VALID_WORD_PATTERN.matcher(word).matches();
-    }
-
-    private static String baseForm(Analysis analysis) {
-        return analysis.get("BASEFORM");
     }
 }
