@@ -46,7 +46,7 @@ public final class VoikkoTokenFilterFactory extends AbstractTokenFilterFactory i
 
         analysisCache = new AnalysisCache(settings.getAsInt("analysisCacheSize", 1024));
 
-        String language = settings.get("language", "fi_FI");
+        String language = settings.get("language", "fi_FI-x-morpho");
         String dictionaryPath = settings.get("dictionaryPath");
 
         for (String dir : settings.getAsArray("libraryPath"))
