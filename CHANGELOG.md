@@ -1,3 +1,7 @@
+## 0.1.4 (2013-11-18)
+
+  - Use 'fi_fi-x-morpho' as the default language, forcing use of morpho-dictionary.
+
 ## 0.1.3 (2013-09-18)
 
   - Allow configuring size of analysis-cache.
