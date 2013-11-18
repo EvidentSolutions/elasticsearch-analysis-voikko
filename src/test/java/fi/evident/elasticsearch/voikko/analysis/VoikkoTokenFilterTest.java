@@ -59,16 +59,28 @@ public class VoikkoTokenFilterTest {
     @Before
     public void initializeLibraryAndDictionaryPaths() {
         String voikkoPath = System.getProperty("voikko.path");
-        if (voikkoPath == null)
+
+        File dictDirectory = null;
+        String dictPath = System.getProperty("voikko.dict.path");
+        if (dictPath != null) {
+            dictDirectory = new File(dictPath);
+        } else if (voikkoPath != null) {
+            dictDirectory = new File(voikkoPath, "dicts");
+        }
+
+        if (dictDirectory == null)
             throw new AssumptionViolatedException("System property 'voikko.path' is not defined, add '-Dvoikko.path=/path/to/voikko'");
 
-        File morphology = new File(voikkoPath, "dicts/2/mor-morpho/voikko-fi_FI.pro");
+        File morphology = new File(dictDirectory, "2/mor-morpho/voikko-fi_FI.pro");
         if (!morphology.isFile())
             fail("morphology file " + morphology + " does not exist");
 
         settings.put("index.analysis.filter.myFilter.type", "voikko");
-        settings.put("index.analysis.filter.myFilter.libraryPath", voikkoPath);
-        settings.put("index.analysis.filter.myFilter.dictionaryPath", new File(voikkoPath, "dicts").getAbsolutePath());
+
+        if (voikkoPath != null)
+            settings.put("index.analysis.filter.myFilter.libraryPath", voikkoPath);
+
+        settings.put("index.analysis.filter.myFilter.dictionaryPath", dictDirectory.getAbsolutePath());
     }
 
     @Test
