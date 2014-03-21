@@ -44,7 +44,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <elasticsearch.version>0.90.7</elasticsearch.version>
+        <elasticsearch.version>1.0.1</elasticsearch.version>
         <voikko.path>${user.home}/dev/voikko</voikko.path>
     </properties>
 
@@ -53,11 +53,6 @@
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
             <version>${elasticsearch.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.jna</groupId>
-            <artifactId>jna</artifactId>
-            <version>3.0.9</version>
         </dependency>
         <dependency>
             <groupId>org.puimula.voikko</groupId>
