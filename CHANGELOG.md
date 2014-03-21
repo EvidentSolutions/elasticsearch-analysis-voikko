@@ -1,3 +1,7 @@
+## x.y.z (yyyy-mm-dd)
+
+  - Added tokenizer that is suitable for tokenizing Finnish text.
+
 ## 0.1.4 (2013-11-18)
 
   - Use 'fi_fi-x-morpho' as the default language, forcing use of morpho-dictionary.

@@ -25,4 +25,9 @@ public class VoikkoAnalysisBinderProcessor extends AnalysisModule.AnalysisBinder
     public void processTokenFilters(TokenFiltersBindings tokenFiltersBindings) {
         tokenFiltersBindings.processTokenFilter("voikko", VoikkoTokenFilterFactory.class);
     }
+
+    @Override
+    public void processTokenizers(TokenizersBindings tokenizersBindings) {
+        tokenizersBindings.processTokenizer("finnish", FinnishTokenizerFactory.class);
+    }
 }

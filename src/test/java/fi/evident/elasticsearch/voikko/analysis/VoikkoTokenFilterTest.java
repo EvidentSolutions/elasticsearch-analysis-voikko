@@ -18,7 +18,6 @@
 package fi.evident.elasticsearch.voikko.analysis;
 
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
@@ -85,7 +84,7 @@ public class VoikkoTokenFilterTest {
 
     @Test
     public void defaultSettings() throws Exception {
-        assertTokens("Testaan voikon taivutusta tällä   tavalla - yksinkertaisesti.",
+        assertTokens("Testaan voikon taivutusta tällä tavalla yksinkertaisesti.",
                 token("Testaan", "testata", 1),
                 token("voikon", "voikko", 1),
                 token("taivutusta", "taivuttu", 1),
@@ -108,7 +107,7 @@ public class VoikkoTokenFilterTest {
     public void allVariations() throws Exception {
         settings.put("index.analysis.filter.myFilter.analyzeAll", true);
 
-        assertTokens("Testaan voikon taivutusta tällä   tavalla - yksinkertaisesti.",
+        assertTokens("Testaan voikon taivutusta tällä tavalla yksinkertaisesti.",
                 token("Testaan", "testata", 1),
                 token("voikon", "voikko", 1),
                 token("voikon", "Voikko", 0),
@@ -126,7 +125,7 @@ public class VoikkoTokenFilterTest {
         settings.put("index.analysis.filter.myFilter.analyzeAll", true);
         settings.put("index.analysis.filter.myFilter.separateTokens", false);
 
-        assertTokens("Testaan voikon taivutusta tällä   tavalla - yksinkertaisesti.",
+        assertTokens("Testaan voikon taivutusta tällä tavalla yksinkertaisesti.",
                 token("Testaan", "testata", 1),
                 token("voikon", "voikko", 1),
                 token("voikon", "Voikko", 0),
@@ -137,6 +136,19 @@ public class VoikkoTokenFilterTest {
                 token("tavalla", "tapa", 1),
                 token("yksinkertaisesti", "yksinkertainen", 1),
                 token("yksinkertaisesti", "yksinkertainen", 0));
+    }
+
+    @Test
+    public void compoundWords() {
+        assertTokens("isoisälle", token("isoisälle", "isoisä", 1));
+        assertTokens("tekokuusta keinokuuhun",
+                token("tekokuusta", "tekokuu", 1),
+                token("keinokuuhun", "keinokuu", 1));
+    }
+
+    @Test
+    public void compoundWordsWithHyphens() {
+        assertTokens("rippi-isälle", token("rippi-isälle", "rippi-isä", 1));
     }
 
     private static TokenData token(String original, String token, int positionIncrement) {
@@ -174,7 +186,7 @@ public class VoikkoTokenFilterTest {
 
     private TokenStream createTokenStream(String text) {
         TokenFilterFactory filterFactory = createFilterFactory(settings.build());
-        return filterFactory.create(new StandardTokenizer(Version.LUCENE_46, new StringReader(text)));
+        return filterFactory.create(new FinnishTokenizer(Version.LUCENE_46, new StringReader(text)));
     }
 
     private static TokenFilterFactory createFilterFactory(Settings settings) {
