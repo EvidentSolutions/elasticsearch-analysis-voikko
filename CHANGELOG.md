@@ -1,4 +1,4 @@
-## x.y.z (yyyy-mm-dd)
+## 0.2.0 (2014-03-21)
 
   - Added tokenizer that is suitable for tokenizing Finnish text.
 

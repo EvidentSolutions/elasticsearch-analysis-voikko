@@ -15,12 +15,14 @@ Next, you'll need to download [morpho dictionary](http://www.puimula.org/htp/tes
 Unzip this into Voikko's dictionary directory (e.g. `/usr/lib/voikko` in Debian) or into a directory you specify with
 `dictionaryPath` configuration property.
 
-Finally, to install the plugin, run: `bin/plugin --install fi.evident.elasticsearch/elasticsearch-analysis-voikko/0.1.4`.
+Finally, to install the plugin, run: `bin/plugin --install fi.evident.elasticsearch/elasticsearch-analysis-voikko/0.2.0`.
 
     -----------------------------------------------
     | Voikko Analysis Plugin   | ElasticSearch    |
     -----------------------------------------------
-    | 0.1-SNAPSHOT    (master) | 1.0.1  -> master |
+    | 0.2-SNAPSHOT    (master) | 1.0.1  -> master |
+    |----------------------------------------------
+    | 0.2.0                    | 1.0.1            |
     |----------------------------------------------
     | 0.1.4                    | 0.90.7           |
     |----------------------------------------------
@@ -28,7 +30,7 @@ Finally, to install the plugin, run: `bin/plugin --install fi.evident.elasticsea
 Configuring
 -----------
 
-Include `voikko` filter in your analyzer, for example:
+Include `finnish` tokenizer and `voikko` filter in your analyzer, for example:
 
     :::json
     {
@@ -36,8 +38,8 @@ Include `voikko` filter in your analyzer, for example:
         "analysis": {
           "analyzer": {
             "default": {
-              "tokenizer": "standard",
-              "filter": ["asciifolding", "lowercase", "voikkoFilter"]
+              "tokenizer": "finnish",
+              "filter": ["lowercase", "voikkoFilter"]
             }
           },
           "filter": {
