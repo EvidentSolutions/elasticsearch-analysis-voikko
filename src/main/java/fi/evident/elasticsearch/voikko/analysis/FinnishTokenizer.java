@@ -33,12 +33,8 @@ public class FinnishTokenizer extends CharTokenizer {
         super(matchVersion, in);
     }
 
-    public FinnishTokenizer(Version matchVersion, AttributeFactory factory, Reader in) {
-        super(matchVersion, factory, in);
-    }
-
     @Override
     protected boolean isTokenChar(int c) {
-        return Character.isLetter(c) || c == '-';
+        return Character.isLetterOrDigit(c) || c == '-';
     }
 }
