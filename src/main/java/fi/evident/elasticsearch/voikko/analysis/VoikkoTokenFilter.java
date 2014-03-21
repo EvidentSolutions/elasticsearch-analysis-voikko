@@ -44,7 +44,7 @@ final class VoikkoTokenFilter extends TokenFilter {
     private final Deque<String> alternatives = new ArrayDeque<String>();
     private final AnalysisCache analysisCache;
 
-    private static final Pattern VALID_WORD_PATTERN = Pattern.compile("[a-zA-ZåäöÅÄÖ]+");
+    private static final Pattern VALID_WORD_PATTERN = Pattern.compile("[a-zA-ZåäöÅÄÖ-]+");
 
     VoikkoTokenFilter(TokenStream input, VoikkoPool pool, AnalysisCache analysisCache, VoikkoTokenFilterConfiguration cfg) throws InterruptedException {
         super(input);
