@@ -17,15 +17,11 @@ Unzip this into Voikko's dictionary directory (e.g. `/usr/lib/voikko` in Debian)
 
 Finally, to install the plugin, run: `bin/plugin --install fi.evident.elasticsearch/elasticsearch-analysis-voikko/0.2.0`.
 
-    -----------------------------------------------
-    | Voikko Analysis Plugin   | ElasticSearch    |
-    -----------------------------------------------
-    | 0.2-SNAPSHOT    (master) | 1.0.1  -> master |
-    |----------------------------------------------
-    | 0.2.0                    | 1.0.1            |
-    |----------------------------------------------
-    | 0.1.4                    | 0.90.7           |
-    |----------------------------------------------
+Docker-image
+------------
+
+If you are using [Docker](https://www.docker.io/), you can use [komu/elasticsearch-voikko](https://index.docker.io/u/komu/elasticsearch-voikko/) image to get Elasticsearch instance
+with the above installations included.
 
 Configuring
 -----------
