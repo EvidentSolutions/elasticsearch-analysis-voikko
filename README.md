@@ -1,4 +1,4 @@
-Voikko Analysis for ElasticSearch
+Voikko Analysis for Elasticsearch
 =================================
 
 The Voikko Analysis plugin provides Finnish language analysis using [Voikko](http://voikko.puimula.org/).
