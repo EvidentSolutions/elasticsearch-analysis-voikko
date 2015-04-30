@@ -185,8 +185,9 @@ public class VoikkoTokenFilterTest {
     }
 
     private TokenStream createTokenStream(String text) {
+        settings.put("index.version.created", "1");
         TokenFilterFactory filterFactory = createFilterFactory(settings.build());
-        return filterFactory.create(new FinnishTokenizer(Version.LUCENE_46, new StringReader(text)));
+        return filterFactory.create(new FinnishTokenizer(Version.LUCENE_4_10_4, new StringReader(text)));
     }
 
     private static TokenFilterFactory createFilterFactory(Settings settings) {

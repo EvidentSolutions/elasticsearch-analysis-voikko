@@ -18,7 +18,6 @@
 package fi.evident.elasticsearch.voikko.analysis;
 
 import org.apache.lucene.analysis.TokenStream;
-import org.elasticsearch.common.component.CloseableComponent;
 import org.elasticsearch.common.inject.Inject;
 import org.elasticsearch.common.inject.assistedinject.Assisted;
 import org.elasticsearch.common.settings.Settings;
@@ -28,8 +27,10 @@ import org.elasticsearch.index.analysis.AnalysisSettingsRequired;
 import org.elasticsearch.index.settings.IndexSettings;
 import org.puimula.libvoikko.Voikko;
 
+import java.io.Closeable;
+
 @AnalysisSettingsRequired
-public final class VoikkoTokenFilterFactory extends AbstractTokenFilterFactory implements CloseableComponent {
+public final class VoikkoTokenFilterFactory extends AbstractTokenFilterFactory implements Closeable {
 
     private final VoikkoPool voikkoPool;
 

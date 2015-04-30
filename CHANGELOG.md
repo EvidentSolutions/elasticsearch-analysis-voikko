@@ -1,3 +1,7 @@
+## 0.3.0 (2015-04-30)
+
+  - New version that is compatible with ES 1.5.
+
 ## 0.2.0 (2014-03-21)
 
   - Added tokenizer that is suitable for tokenizing Finnish text.
