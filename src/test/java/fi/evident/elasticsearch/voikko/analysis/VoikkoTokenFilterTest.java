@@ -21,10 +21,8 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
-import org.apache.lucene.util.Version;
 import org.elasticsearch.common.inject.Injector;
 import org.elasticsearch.common.inject.ModulesBuilder;
-import org.elasticsearch.common.settings.ImmutableSettings;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.settings.SettingsModule;
 import org.elasticsearch.env.Environment;
@@ -35,8 +33,8 @@ import org.elasticsearch.index.analysis.AnalysisModule;
 import org.elasticsearch.index.analysis.AnalysisService;
 import org.elasticsearch.index.analysis.TokenFilterFactory;
 import org.elasticsearch.index.settings.IndexSettingsModule;
-import org.elasticsearch.indices.analysis.IndicesAnalysisModule;
 import org.elasticsearch.indices.analysis.IndicesAnalysisService;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,11 +47,10 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import static org.junit.Assume.assumeTrue;
 
 public class VoikkoTokenFilterTest {
 
-    private final ImmutableSettings.Builder settings = ImmutableSettings.builder();
+    private final Settings.Builder settings = Settings.builder();
 
     @Before
     public void initializeLibraryAndDictionaryPaths() {
@@ -66,7 +63,7 @@ public class VoikkoTokenFilterTest {
         } else if (voikkoPath != null) {
             dictDirectory = new File(voikkoPath, "dicts");
         } else {
-            assumeTrue("System property 'voikko.path' is not defined, add '-Dvoikko.path=/path/to/voikko'", false);
+            Assume.assumeTrue("System property 'voikko.path' is not defined, add '-Dvoikko.path=/path/to/voikko'", false);
             return;
         }
 
@@ -74,6 +71,7 @@ public class VoikkoTokenFilterTest {
         if (!morphology.isFile())
             fail("morphology file " + morphology + " does not exist");
 
+        settings.put("path.home", "");
         settings.put("index.analysis.filter.myFilter.type", "voikko");
 
         if (voikkoPath != null)
@@ -183,12 +181,14 @@ public class VoikkoTokenFilterTest {
     private TokenStream createTokenStream(String text) {
         settings.put("index.version.created", "1");
         TokenFilterFactory filterFactory = createFilterFactory(settings.build());
-        return filterFactory.create(new FinnishTokenizer(Version.LUCENE_4_10_4, new StringReader(text)));
+        FinnishTokenizer tokenizer = new FinnishTokenizer();
+        tokenizer.setReader(new StringReader(text));
+        return filterFactory.create(tokenizer);
     }
 
     private static TokenFilterFactory createFilterFactory(Settings settings) {
         Index index = new Index("test");
-        Injector parentInjector = new ModulesBuilder().add(new SettingsModule(settings), new EnvironmentModule(new Environment(settings)), new IndicesAnalysisModule()).createInjector();
+        Injector parentInjector = new ModulesBuilder().add(new SettingsModule(settings), new EnvironmentModule(new Environment(settings))).createInjector();
         Injector injector = new ModulesBuilder().add(
                 new IndexSettingsModule(index, settings),
                 new IndexNameModule(index),

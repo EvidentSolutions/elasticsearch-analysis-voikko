@@ -1,3 +1,7 @@
+## Unreleased
+
+  - New version that is compatible with ES 2.2.1.
+
 ## 0.3.0 (2015-04-30)
 
   - New version that is compatible with ES 1.5.

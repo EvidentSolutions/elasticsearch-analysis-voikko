@@ -24,7 +24,7 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.index.Index;
 import org.elasticsearch.index.analysis.AbstractTokenFilterFactory;
 import org.elasticsearch.index.analysis.AnalysisSettingsRequired;
-import org.elasticsearch.index.settings.IndexSettings;
+import org.elasticsearch.index.settings.IndexSettingsService;
 import org.puimula.libvoikko.Voikko;
 
 import java.io.Closeable;
@@ -38,8 +38,8 @@ public final class VoikkoTokenFilterFactory extends AbstractTokenFilterFactory i
     private final VoikkoTokenFilterConfiguration cfg = new VoikkoTokenFilterConfiguration();
 
     @Inject
-    public VoikkoTokenFilterFactory(Index index, @IndexSettings Settings indexSettings, @Assisted String name, @Assisted Settings settings) {
-        super(index, indexSettings, name, settings);
+    public VoikkoTokenFilterFactory(Index index, IndexSettingsService indexSettingsService, @Assisted String name, @Assisted Settings settings) {
+        super(index, indexSettingsService.getSettings(), name, settings);
 
         cfg.analyzeAll = settings.getAsBoolean("analyzeAll", cfg.analyzeAll);
         cfg.minimumWordSize = settings.getAsInt("minimumWordSize", cfg.minimumWordSize);

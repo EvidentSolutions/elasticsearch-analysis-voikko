@@ -23,9 +23,7 @@ import org.elasticsearch.common.inject.assistedinject.Assisted;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.index.Index;
 import org.elasticsearch.index.analysis.AbstractTokenizerFactory;
-import org.elasticsearch.index.settings.IndexSettings;
-
-import java.io.Reader;
+import org.elasticsearch.index.settings.IndexSettingsService;
 
 /**
  * Factory that creates {@link FinnishTokenizer}.
@@ -33,12 +31,12 @@ import java.io.Reader;
 public class FinnishTokenizerFactory extends AbstractTokenizerFactory {
 
     @Inject
-    public FinnishTokenizerFactory(Index index, @IndexSettings Settings indexSettings, @Assisted String name, @Assisted Settings settings) {
-        super(index, indexSettings, name, settings);
+    public FinnishTokenizerFactory(Index index, IndexSettingsService indexSettingsService, @Assisted String name, @Assisted Settings settings) {
+        super(index, indexSettingsService.getSettings(), name, settings);
     }
 
     @Override
-    public Tokenizer create(Reader reader) {
-        return new FinnishTokenizer(version, reader);
+    public Tokenizer create() {
+        return new FinnishTokenizer();
     }
 }

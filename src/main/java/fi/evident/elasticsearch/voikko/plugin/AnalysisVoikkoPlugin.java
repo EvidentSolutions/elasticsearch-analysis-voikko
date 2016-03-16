@@ -19,9 +19,9 @@ package fi.evident.elasticsearch.voikko.plugin;
 
 import fi.evident.elasticsearch.voikko.analysis.VoikkoAnalysisBinderProcessor;
 import org.elasticsearch.index.analysis.AnalysisModule;
-import org.elasticsearch.plugins.AbstractPlugin;
+import org.elasticsearch.plugins.Plugin;
 
-public class AnalysisVoikkoPlugin extends AbstractPlugin {
+public class AnalysisVoikkoPlugin extends Plugin {
 
     @Override
     public String name() {

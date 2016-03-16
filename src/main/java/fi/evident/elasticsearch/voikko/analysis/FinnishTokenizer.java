@@ -18,9 +18,6 @@
 package fi.evident.elasticsearch.voikko.analysis;
 
 import org.apache.lucene.analysis.util.CharTokenizer;
-import org.apache.lucene.util.Version;
-
-import java.io.Reader;
 
 /**
  * A tokenizer that tries to break text into tokens based on rules of Finnish language.
@@ -28,10 +25,6 @@ import java.io.Reader;
  * treats hyphen as a letter as well, since hyphens can be part of words. (e.g. "rippi-isä").
  */
 public class FinnishTokenizer extends CharTokenizer {
-
-    public FinnishTokenizer(Version matchVersion, Reader in) {
-        super(matchVersion, in);
-    }
 
     @Override
     protected boolean isTokenChar(int c) {
