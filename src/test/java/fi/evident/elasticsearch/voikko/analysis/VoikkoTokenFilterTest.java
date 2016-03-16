@@ -39,7 +39,6 @@ import org.elasticsearch.indices.analysis.IndicesAnalysisModule;
 import org.elasticsearch.indices.analysis.IndicesAnalysisService;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.internal.AssumptionViolatedException;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,6 +49,7 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import static org.junit.Assume.assumeTrue;
 
 public class VoikkoTokenFilterTest {
 
@@ -59,16 +59,16 @@ public class VoikkoTokenFilterTest {
     public void initializeLibraryAndDictionaryPaths() {
         String voikkoPath = System.getProperty("voikko.path");
 
-        File dictDirectory = null;
+        File dictDirectory;
         String dictPath = System.getProperty("voikko.dict.path");
         if (dictPath != null) {
             dictDirectory = new File(dictPath);
         } else if (voikkoPath != null) {
             dictDirectory = new File(voikkoPath, "dicts");
+        } else {
+            assumeTrue("System property 'voikko.path' is not defined, add '-Dvoikko.path=/path/to/voikko'", false);
+            return;
         }
-
-        if (dictDirectory == null)
-            throw new AssumptionViolatedException("System property 'voikko.path' is not defined, add '-Dvoikko.path=/path/to/voikko'");
 
         File morphology = new File(dictDirectory, "2/mor-morpho/voikko-fi_FI.pro");
         if (!morphology.isFile())
