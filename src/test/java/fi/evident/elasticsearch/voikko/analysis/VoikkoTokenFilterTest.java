@@ -107,13 +107,11 @@ public class VoikkoTokenFilterTest {
     public void allVariations() throws Exception {
         settings.put("index.analysis.filter.myFilter.analyzeAll", true);
 
-        assertTokens("Testaan voikon taivutusta tällä tavalla yksinkertaisesti.",
+        assertTokens("Testaan voikon analyysiä tällä tavalla yksinkertaisesti.",
                 token("Testaan", "testata", 1),
                 token("voikon", "voikko", 1),
                 token("voikon", "Voikko", 0),
-                token("taivutusta", "taivutus", 1),
-                token("taivutusta", "taivuttu", 0),
-                token("taivutusta", "taivutus", 0),
+                token("analyysiä", "analyysi", 1),
                 token("tällä", "tämä", 1),
                 token("tavalla", "tapa", 1),
                 token("yksinkertaisesti", "yksinkertainen", 1),
@@ -125,13 +123,11 @@ public class VoikkoTokenFilterTest {
         settings.put("index.analysis.filter.myFilter.analyzeAll", true);
         settings.put("index.analysis.filter.myFilter.separateTokens", false);
 
-        assertTokens("Testaan voikon taivutusta tällä tavalla yksinkertaisesti.",
+        assertTokens("Testaan voikon analyysiä tällä tavalla yksinkertaisesti.",
                 token("Testaan", "testata", 1),
                 token("voikon", "voikko", 1),
                 token("voikon", "Voikko", 0),
-                token("taivutusta", "taivutus", 1),
-                token("taivutusta", "taivuttu", 0),
-                token("taivutusta", "taivutus", 0),
+                token("analyysiä", "analyysi", 1),
                 token("tällä", "tämä", 1),
                 token("tavalla", "tapa", 1),
                 token("yksinkertaisesti", "yksinkertainen", 1),
