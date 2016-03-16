@@ -84,10 +84,10 @@ public class VoikkoTokenFilterTest {
 
     @Test
     public void defaultSettings() throws Exception {
-        assertTokens("Testaan voikon taivutusta tällä tavalla yksinkertaisesti.",
+        assertTokens("Testaan voikon analyysiä tällä tavalla yksinkertaisesti.",
                 token("Testaan", "testata", 1),
                 token("voikon", "voikko", 1),
-                token("taivutusta", "taivutus", 1),
+                token("analyysiä", "analyysi", 1),
                 token("tällä", "tämä", 1),
                 token("tavalla", "tapa", 1),
                 token("yksinkertaisesti", "yksinkertainen", 1));
@@ -137,8 +137,8 @@ public class VoikkoTokenFilterTest {
     @Test
     public void compoundWords() {
         assertTokens("isoisälle", token("isoisälle", "isoisä", 1));
-        assertTokens("tekokuusta keinokuuhun",
-                token("tekokuusta", "tekokuusi", 1),
+        assertTokens("tekokuulla keinokuuhun",
+                token("tekokuulla", "tekokuu", 1),
                 token("keinokuuhun", "keinokuu", 1));
     }
 
