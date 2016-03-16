@@ -87,7 +87,7 @@ public class VoikkoTokenFilterTest {
         assertTokens("Testaan voikon taivutusta tällä tavalla yksinkertaisesti.",
                 token("Testaan", "testata", 1),
                 token("voikon", "voikko", 1),
-                token("taivutusta", "taivuttu", 1),
+                token("taivutusta", "taivutus", 1),
                 token("tällä", "tämä", 1),
                 token("tavalla", "tapa", 1),
                 token("yksinkertaisesti", "yksinkertainen", 1));
@@ -111,8 +111,8 @@ public class VoikkoTokenFilterTest {
                 token("Testaan", "testata", 1),
                 token("voikon", "voikko", 1),
                 token("voikon", "Voikko", 0),
-                token("taivutusta", "taivuttu", 1),
-                token("taivutusta", "taivutus", 0),
+                token("taivutusta", "taivutus", 1),
+                token("taivutusta", "taivuttu", 0),
                 token("taivutusta", "taivutus", 0),
                 token("tällä", "tämä", 1),
                 token("tavalla", "tapa", 1),
@@ -129,8 +129,8 @@ public class VoikkoTokenFilterTest {
                 token("Testaan", "testata", 1),
                 token("voikon", "voikko", 1),
                 token("voikon", "Voikko", 0),
-                token("taivutusta", "taivuttu", 1),
-                token("taivutusta", "taivutus", 0),
+                token("taivutusta", "taivutus", 1),
+                token("taivutusta", "taivuttu", 0),
                 token("taivutusta", "taivutus", 0),
                 token("tällä", "tämä", 1),
                 token("tavalla", "tapa", 1),
@@ -142,7 +142,7 @@ public class VoikkoTokenFilterTest {
     public void compoundWords() {
         assertTokens("isoisälle", token("isoisälle", "isoisä", 1));
         assertTokens("tekokuusta keinokuuhun",
-                token("tekokuusta", "tekokuu", 1),
+                token("tekokuusta", "tekokuusi", 1),
                 token("keinokuuhun", "keinokuu", 1));
     }
 
