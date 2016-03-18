@@ -85,33 +85,3 @@ the [morpho dictionary](http://www.puimula.org/htp/testing/voikko-snapshot/dict-
 ## License
 
 This library is released under the LGPL, version 2.1 or later.
-
-
-```
- curl -XPUT 'localhost:9200/myindex' -d '{
-  "index": {
-    "analysis": {
-      "analyzer": {
-        "default": {
-          "tokenizer": "finnish",
-          "filter": ["lowercase", "voikkoFilter"]
-        }
-      },
-      "filter": {
-        "voikkoFilter": {
-          "type": "voikko",
-          "dictionaryPath": "/Users/komu/dev/voikko/dicts"
-        }
-      }
-    }
-  }
-}
-```
-
-```
-curl -XPOST 'localhost:9200/myindex/1?pretty' -d '{ "doc": { "name": "kissansa" }}'
-```
-
-```
-bin/plugin remove elasticsearch-analysis-voikko && bin/plugin install file:/Users/komu/src/evident/elasticsearch-analysis-voikko/target/releases/elasticsearch-analysis-voikko-0.4.0-SNAPSHOT.zip && bin/elasticsearch -Djava.security.policy=foo.policy
-```
