@@ -20,7 +20,11 @@ Next, you'll need to download [morpho dictionary](http://www.puimula.org/htp/tes
 Unzip this into Voikko's dictionary directory (e.g. `/usr/lib/voikko` in Debian) or into a directory you specify with
 `dictionaryPath` configuration property.
 
-Finally, to install the plugin, run: `bin/plugin install fi.evident.elasticsearch/elasticsearch-analysis-voikko/0.4.0`.
+Finally, to install the plugin, run: 
+
+```
+bin/plugin install fi.evident.elasticsearch/elasticsearch-analysis-voikko/0.4.0
+```
 
 ### Security manager
 
