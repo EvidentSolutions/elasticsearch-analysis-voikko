@@ -34,11 +34,16 @@ that they need in `plugin-security.policy`. However, elasticsearch-analysis-voik
 and therefore can't be included in the plugin zip. This means that the security policy bundled with the
 plugin will not apply to JNA, yet it should be able to load `libvoikko` from the system.
 
-Having tried various workarounds, the only solution I've found is to disable the security manager when starting
-Elasticsearch:
+Having tried various workarounds, the only solution I've found is to disable the security manager. Either start ES with:
 
 ```
 bin/elasticsearch --security.manager.enabled=false
+```
+
+or add the following to your `elasticsearch.yml`:
+
+```
+security.manager.enabled: false
 ```
 
 This is somewhat unfortunate, but no less secure than running ES 1.x which did not include a security manager.
