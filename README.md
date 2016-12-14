@@ -16,7 +16,9 @@ The Voikko Analysis plugin provides Finnish language analysis using [Voikko](htt
 The plugin needs `libvoikko` shared library to work. Details of installing the library varies
 based on operating system. In Debian based systems `apt-get install libvoikko1` should work.
 
-Next, you'll need to download [morpho dictionary](http://www.puimula.org/htp/testing/voikko-snapshot/dict-morpho.zip).
+Next, you'll need to download [morpho dictionary](http://www.puimula.org/htp/testing/voikko-snapshot/dict-morpho.zip) 
+(for libvoikko version 4.0+, use [morpho dict v5](http://www.puimula.org/htp/testing/voikko-snapshot-v5/dict-morpho.zip) 
+instead).
 Unzip this into Voikko's dictionary directory (e.g. `/usr/lib/voikko` in Debian) or into a directory you specify with
 `dictionaryPath` configuration property.
 
