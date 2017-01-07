@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/elasticsearch-analysis-voikko.iml" filepath="$PROJECT_DIR$/elasticsearch-analysis-voikko.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/elasticsearch-analysis-voikko.iml" filepath="$PROJECT_DIR$/.idea/modules/elasticsearch-analysis-voikko.iml" />
     </modules>
   </component>
 </project>
-

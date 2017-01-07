@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.lucene:lucene-spatial3d:6.3.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.lucene/lucene-spatial3d/6.3.0/aa94b4a8636b3633008640cc5155ad354aebcea5/lucene-spatial3d-6.3.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.lucene/lucene-spatial3d/6.3.0/23529b2f07d75c5c4b4bcc1535f119c2da426787/lucene-spatial3d-6.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

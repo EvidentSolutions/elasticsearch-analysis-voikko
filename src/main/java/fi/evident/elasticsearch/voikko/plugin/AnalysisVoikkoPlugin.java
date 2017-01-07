@@ -1,40 +1,42 @@
 /*
- * Copyright 2013 Evident Solutions Oy
+ * Copyright 2013-2017 Evident Solutions Oy
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation; either version 2.1
- * of the License, or (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * You should have received a copy of the Lesser GNU General Public License
- * along with this program. If not, see <​http://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package fi.evident.elasticsearch.voikko.plugin;
 
-import fi.evident.elasticsearch.voikko.analysis.VoikkoAnalysisBinderProcessor;
-import org.elasticsearch.index.analysis.AnalysisModule;
+import fi.evident.elasticsearch.voikko.analysis.FinnishTokenizerFactory;
+import fi.evident.elasticsearch.voikko.analysis.VoikkoTokenFilterFactory;
+import org.elasticsearch.index.analysis.TokenFilterFactory;
+import org.elasticsearch.index.analysis.TokenizerFactory;
+import org.elasticsearch.indices.analysis.AnalysisModule;
+import org.elasticsearch.plugins.AnalysisPlugin;
 import org.elasticsearch.plugins.Plugin;
 
-public class AnalysisVoikkoPlugin extends Plugin {
+import java.util.Map;
+
+import static java.util.Collections.singletonMap;
+
+public class AnalysisVoikkoPlugin extends Plugin implements AnalysisPlugin {
 
     @Override
-    public String name() {
-        return "analysis-voikko";
+    public Map<String, AnalysisModule.AnalysisProvider<TokenFilterFactory>> getTokenFilters() {
+        return singletonMap("voikko", VoikkoTokenFilterFactory::new);
     }
 
     @Override
-    public String description() {
-        return "Voikko analysis support";
-    }
-
-    @SuppressWarnings("UnusedDeclaration")
-    public void onModule(AnalysisModule module) {
-        module.addProcessor(new VoikkoAnalysisBinderProcessor());
+    public Map<String, AnalysisModule.AnalysisProvider<TokenizerFactory>> getTokenizers() {
+        return singletonMap("finnish", FinnishTokenizerFactory::new);
     }
 }

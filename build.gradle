@@ -1,0 +1,52 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name 'sonatype-snapshots'
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        jcenter()
+    }
+    dependencies {
+        classpath "org.elasticsearch.gradle:build-tools:5.1.1"
+    }
+}
+
+apply plugin: 'idea'
+apply plugin: 'elasticsearch.esplugin'
+apply plugin: 'maven-publish'
+
+version = '0.5.0-SNAPSHOT'
+
+dependencies {
+    compile 'org.puimula.voikko:libvoikko:4.0.1'
+}
+
+esplugin {
+    description 'Voikko Analysis for Elasticsearch'
+    classname 'fi.evident.elasticsearch.voikko.plugin.AnalysisVoikkoPlugin'
+    name 'elasticsearch-analysis-voikko'
+}
+
+test {
+    systemProperty 'voikko.path', System.getProperty('voikko.path')
+
+    if (System.getProperty('voikko.dict.path') != null)
+        systemProperty 'voikko.dict.path', System.getProperty('voikko.dict.path')
+}
+
+publishing {
+    publications {
+        DefaultPublication(MavenPublication) {
+            groupId 'fi.evident.elasticsearch'
+            artifactId 'elasticsearch-analysis-voikko'
+            from components.java
+            artifact javadocJar
+            artifact sourcesJar
+            artifact bundlePlugin
+        }
+    }
+}
+
+// TODO: temporary workaround until it's fixed in elasticsearch
+thirdPartyAudit.enabled = false

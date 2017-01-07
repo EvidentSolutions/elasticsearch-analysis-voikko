@@ -8,6 +8,7 @@ The Voikko Analysis plugin provides Finnish language analysis using [Voikko](htt
 
 | Plugin version | Elasticsearch version |
 | -------------- | ----------------------|
+| 0.5.0-SNAPSHOT | 5.1.1                 |
 | 0.4.0          | 2.2.1                 |
 | 0.3.0          | 1.5.2                 |
 
@@ -93,6 +94,17 @@ To run the tests, you need to specify `voikko.home` system property which should
 a directory containing libvoikko shared library and subdirectory `dicts` which contains
 the [morpho dictionary](http://www.puimula.org/htp/testing/voikko-snapshot/dict-morpho.zip).
 
+After installing the plugin, you can quickly verify that it works by executing:
+
+```
+curl -XGET 'localhost:9200/_analyze' -d '
+{
+  "tokenizer" : "finnish",
+  "filter" : [{"type": "voikko", "libraryPath": "/Users/komu/dev/voikko", "dictionaryPath": "/Users/komu/dev/voikko/dicts"}],
+  "text" : "Testaan voikon analyysiä tällä tavalla yksinkertaisesti."
+}'
+```
+
 ## License
 
-This library is released under the LGPL, version 2.1 or later.
+This library is released under the [Apache License, Version 2.0](http://apache.org/licenses/LICENSE-2.0).

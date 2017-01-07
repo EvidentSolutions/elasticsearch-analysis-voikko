@@ -1,0 +1,5 @@
+grant {
+  // who knows where voikko dynamic library and dictionary are installed
+  permission java.io.FilePermission "<<ALL FILES>>", "read";
+  permission java.lang.reflect.ReflectPermission "newProxyInPackage.org.puimula.libvoikko";
+};
