@@ -1,4 +1,4 @@
-## Unreleased
+## 0.4.0 (2016-03-18)
 
   - New version that is compatible with ES 2.2.1.
 
