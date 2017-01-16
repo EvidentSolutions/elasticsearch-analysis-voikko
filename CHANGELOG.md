@@ -1,3 +1,7 @@
+## 0.5.0 (2017-01-16)
+
+  - New version that is compatible with ES 5.1.1.
+
 ## 0.4.0 (2016-03-18)
 
   - New version that is compatible with ES 2.2.1.

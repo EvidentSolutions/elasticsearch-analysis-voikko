@@ -8,11 +8,13 @@ The Voikko Analysis plugin provides Finnish language analysis using [Voikko](htt
 
 | Plugin version | Elasticsearch version |
 | -------------- | ----------------------|
-| 0.5.0-SNAPSHOT | 5.1.1                 |
+| 0.5.0          | 5.1.1                 |
 | 0.4.0          | 2.2.1                 |
 | 0.3.0          | 1.5.2                 |
 
 ## Installing
+
+### Installing Voikko
 
 The plugin needs `libvoikko` shared library to work. Details of installing the library varies
 based on operating system. In Debian based systems `apt-get install libvoikko1` should work.
@@ -23,34 +25,55 @@ instead).
 Unzip this into Voikko's dictionary directory (e.g. `/usr/lib/voikko` in Debian) or into a directory you specify with
 `dictionaryPath` configuration property.
 
+### Installing the plugin
+
 Finally, to install the plugin, run: 
 
 ```
-bin/plugin install fi.evident.elasticsearch/elasticsearch-analysis-voikko/0.4.0
+bin/elasticsearch-plugin install https://repo1.maven.org/maven2/fi/evident/elasticsearch/elasticsearch-analysis-voikko/0.5.0/elasticsearch-analysis-voikko-0.5.0.zip
 ```
 
-### Security manager
+### Security policy
 
-Elasticsearch 2.x ships with a security manager enabled by default. Plugins can specify the permissions
+Elasticsearch ships with a pretty restrictive security policy. Plugins can specify the permissions
 that they need in `plugin-security.policy`. However, elasticsearch-analysis-voikko uses
 [JNA library](https://github.com/java-native-access/jna) which is already distributed with Elasticsearch
 and therefore can't be included in the plugin zip. This means that the security policy bundled with the
 plugin will not apply to JNA, yet it should be able to load `libvoikko` from the system.
 
-Having tried various workarounds, the only solution I've found is to disable the security manager. Either start ES with:
+Therefore you need to create a custom security policy, granting Elasticsearch itself the permission
+to load `libvoikko`:
 
 ```
-bin/elasticsearch --security.manager.enabled=false
+grant {
+  permission java.io.FilePermission "<<ALL FILES>>", "read";
+  permission java.lang.reflect.ReflectPermission "newProxyInPackage.org.puimula.libvoikko";
+};
 ```
 
-or add the following to your `elasticsearch.yml`:
+(You don't really need to grant read access to `<<ALL FILES>>`, you can pass the location
+of `libvoikko` instead.)
+
+Save this as `custom-elasticsearch.policy` and tell Elasticsearch to load it:
 
 ```
-security.manager.enabled: false
+export ES_JAVA_OPTS=-Djava.security.policy=file:/path/to/custom-elasticsearch.policy
 ```
 
-This is somewhat unfortunate, but no less secure than running ES 1.x which did not include a security manager.
-I'd be happy to get pull requests for something better.
+### Verify installation
+
+After installing the plugin, you can quickly verify that it works by executing:
+
+```
+curl -XGET 'localhost:9200/_analyze' -d '
+{
+  "tokenizer" : "finnish",
+  "filter" : [{"type": "voikko", "libraryPath": "/directory/of/libvoikko", "dictionaryPath": "/directory/of/voikko/dictionaries"}],
+  "text" : "Testataan voikon analyysiä tällä tavalla yksinkertaisesti."
+}'
+```
+
+If this works without error messages, you can proceed to configure the plugin index.
 
 ## Configuring
 
@@ -93,17 +116,6 @@ You can use the following filter options to customize the behaviour of the filte
 To run the tests, you need to specify `voikko.home` system property which should point to
 a directory containing libvoikko shared library and subdirectory `dicts` which contains
 the [morpho dictionary](http://www.puimula.org/htp/testing/voikko-snapshot/dict-morpho.zip).
-
-After installing the plugin, you can quickly verify that it works by executing:
-
-```
-curl -XGET 'localhost:9200/_analyze' -d '
-{
-  "tokenizer" : "finnish",
-  "filter" : [{"type": "voikko", "libraryPath": "/Users/komu/dev/voikko", "dictionaryPath": "/Users/komu/dev/voikko/dicts"}],
-  "text" : "Testaan voikon analyysiä tällä tavalla yksinkertaisesti."
-}'
-```
 
 ## License
 
