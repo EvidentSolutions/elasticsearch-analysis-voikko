@@ -30,7 +30,7 @@ Unzip this into Voikko's dictionary directory (e.g. `/usr/lib/voikko` in Debian)
 Finally, to install the plugin, run: 
 
 ```
-bin/elasticsearch-plugin install https://repo1.maven.org/maven2/fi/evident/elasticsearch/elasticsearch-analysis-voikko/0.5.0/elasticsearch-analysis-voikko-0.5.0.zip
+bin/elasticsearch-plugin install https://github.com/EvidentSolutions/elasticsearch-analysis-voikko/releases/download/v0.5.0/elasticsearch-analysis-voikko-0.5.0.zip
 ```
 
 ### Security policy
