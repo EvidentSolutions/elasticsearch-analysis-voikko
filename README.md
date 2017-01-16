@@ -2,8 +2,6 @@
 
 The Voikko Analysis plugin provides Finnish language analysis using [Voikko](http://voikko.puimula.org/).
 
-[![Build Status](https://drone.io/bitbucket.org/evidentsolutions/elasticsearch-analysis-voikko/status.png)](https://drone.io/bitbucket.org/evidentsolutions/elasticsearch-analysis-voikko/latest)
-
 ## Supported versions
 
 | Plugin version | Elasticsearch version |
