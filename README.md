@@ -77,24 +77,25 @@ If this works without error messages, you can proceed to configure the plugin in
 
 Include `finnish` tokenizer and `voikko` filter in your analyzer, for example:
 
-    :::json
-    {
-      "index": {
-        "analysis": {
-          "analyzer": {
-            "default": {
-              "tokenizer": "finnish",
-              "filter": ["lowercase", "voikkoFilter"]
-            }
-          },
-          "filter": {
-            "voikkoFilter": {
-              "type": "voikko"
-            }
-          }
+```json
+{
+  "index": {
+    "analysis": {
+      "analyzer": {
+        "default": {
+          "tokenizer": "finnish",
+          "filter": ["lowercase", "voikkoFilter"]
+        }
+      },
+      "filter": {
+        "voikkoFilter": {
+          "type": "voikko"
         }
       }
     }
+  }
+}
+```
 
 You can use the following filter options to customize the behaviour of the filter:
 
