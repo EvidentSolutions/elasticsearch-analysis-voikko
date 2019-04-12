@@ -41,6 +41,9 @@ public final class VoikkoTokenFilterFactory extends AbstractTokenFilterFactory i
         cfg.analyzeAll = settings.getAsBoolean("analyzeAll", cfg.analyzeAll);
         cfg.minimumWordSize = settings.getAsInt("minimumWordSize", cfg.minimumWordSize);
         cfg.maximumWordSize = settings.getAsInt("maximumWordSize", cfg.maximumWordSize);
+        cfg.expandCompounds = settings.getAsBoolean("expandCompounds", cfg.expandCompounds);
+        cfg.minimumSubwordSize = settings.getAsInt("minimumSubwordSize", cfg.minimumSubwordSize);
+        cfg.maximumSubwordSize = settings.getAsInt("maximumSubwordSize", cfg.maximumSubwordSize);
 
         analysisCache = new AnalysisCache(settings.getAsInt("analysisCacheSize", 1024));
 

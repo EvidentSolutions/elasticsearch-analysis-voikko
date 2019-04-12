@@ -101,16 +101,17 @@ Include `finnish` tokenizer and `voikko` filter in your analyzer, for example:
 
 You can use the following filter options to customize the behaviour of the filter:
 
-| Parameter         | Default value    | Description                                      |
-|-------------------|------------------|--------------------------------------------------|
-| language          | fi_FI            | Language to use                                  |
-| dictionaryPath    | system dependent | path to voikko dictionaries                      |
-| analyzeAll        | false            | Use all analysis possibilities or just the first |
-| minimumWordSize   | 3                | minimum length of words to analyze               |
-| maximumWordSize   | 100              | maximum length of words to analyze               |
-| libraryPath       | system dependent | path to directory containing libvoikko           |
-| poolMaxSize       | 10               | maximum amount of Voikko-instances to pool       |
-| analysisCacheSize | 1024             | number of analysis results to cache              |
+| Parameter         | Default value    | Description                                                    |
+|-------------------|------------------|----------------------------------------------------------------|
+| language          | fi_FI            | Language to use                                                |
+| dictionaryPath    | system dependent | path to voikko dictionaries                                    |
+| analyzeAll        | false            | Use all analysis possibilities or just the first               |
+| minimumWordSize   | 3                | minimum length of words to analyze                             |
+| maximumWordSize   | 100              | maximum length of words to analyze                             |
+| libraryPath       | system dependent | path to directory containing libvoikko                         |
+| poolMaxSize       | 10               | maximum amount of Voikko-instances to pool                     |
+| analysisCacheSize | 1024             | number of analysis results to cache                            |
+| expandCompounds   | false            | whether to produce separate tokens for parts of compound words |
 
 ## Development
 
