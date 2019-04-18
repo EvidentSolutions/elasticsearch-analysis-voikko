@@ -27,6 +27,8 @@ import org.puimula.libvoikko.Voikko;
 import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.LinkedHashSet;
 import java.util.Deque;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -88,7 +90,7 @@ final class VoikkoTokenFilter extends TokenFilter {
 
         charTermAttribute.setEmpty().append(baseForms.get(0));
 
-        if (cfg.analyzeAll && baseForms.size() > 1) {
+        if ((cfg.analyzeAll || cfg.expandCompounds) && baseForms.size() > 1) {
             current = captureState();
 
             for (String baseForm : baseForms.subList(1, baseForms.size()))
@@ -112,8 +114,17 @@ final class VoikkoTokenFilter extends TokenFilter {
 
         for (Analysis result : results) {
             String baseForm = result.get("BASEFORM");
-            if (baseForm != null)
+            if (baseForm != null) {
                 baseForms.add(baseForm);
+            }
+        }
+        if (cfg.expandCompounds) {
+            for (String compound : expandCompounds(results)) {
+                baseForms.add(compound);
+            }
+        }
+        if (!cfg.analyzeAll) {
+            return new ArrayList<String>(new LinkedHashSet<String>(baseForms));
         }
         return baseForms;
     }
@@ -127,5 +138,83 @@ final class VoikkoTokenFilter extends TokenFilter {
 
     private boolean isCandidateForAnalyzation(CharSequence word) {
         return word.length() >= cfg.minimumWordSize && word.length() <= cfg.maximumWordSize && VALID_WORD_PATTERN.matcher(word).matches();
+    }
+
+    private Set<String> expandCompounds(List<Analysis> analysisList) {
+        // Contains code from the Voikko Filter for Solr
+        // by the National Library of Finland.
+        //
+        // https://github.com/NatLibFi/SolrPlugins
+        Set<String> compoundForms = new LinkedHashSet<String>();
+
+        for (Analysis analysis: analysisList) {
+            if (!analysis.containsKey("WORDBASES")) {
+                continue;
+            }
+            String wordbases = analysis.get("WORDBASES");
+            // Split by plus sign (unless right after an open parenthesis)
+            String matches[] = wordbases.split("(?<!\\()\\+");
+
+            int currentPos = 0, lastPos = 0;
+            String lastWordBody = "";
+            assert matches.length > 1;
+            // The string starts with a plus sign, so skip the first (empty) entry.
+            for (int i = 1; i <= matches.length - 1; i++) {
+                String wordAnalysis, wordBody, baseForm;
+
+                // Get rid of equals sign in e.g. di=oksidi.
+                wordAnalysis = matches[i].replaceAll("=", "");;
+                int parenPos = wordAnalysis.indexOf('(');
+                if (parenPos == -1) {
+                    wordBody = baseForm = wordAnalysis;
+                } else {
+                    // Word body is before the parenthesis
+                    wordBody = wordAnalysis.substring(0, parenPos);
+                    // Base form or derivative is in parenthesis
+                    baseForm = wordAnalysis.substring(parenPos + 1, wordAnalysis.length() - 1);
+                }
+
+                String word;
+                int wordOffset, wordLen;
+                boolean isDerivative = baseForm.startsWith("+");
+                if (isDerivative) {
+                    // Derivative suffix, merge with word body
+                    word = lastWordBody + wordBody;
+                    wordOffset = lastPos;
+                    wordLen = word.length();
+                } else {
+                    word = baseForm;
+                    wordOffset = currentPos;
+                    wordLen = word.length();
+                    lastWordBody = wordBody;
+                    lastPos = currentPos;
+                    currentPos += baseForm.length();
+                }
+
+                // Make sure we don't exceed the length of the original term
+                int termLen = charTermAttribute.toString().length();
+                if (wordOffset + wordLen > termLen) {
+                    if (wordOffset >= termLen) {
+                        wordOffset = wordLen - termLen;
+                        if (wordOffset < 0) {
+                            wordOffset = 0;
+                        }
+                    } else {
+                        wordLen = termLen - wordOffset;
+                    }
+                }
+
+                int maxSubwordSize = cfg.maximumSubwordSize;
+                int minSubwordSize = cfg.minimumSubwordSize;
+                if (wordLen > minSubwordSize) {
+                    if (wordLen > maxSubwordSize) {
+                        word = word.substring(0, maxSubwordSize);
+                        wordLen = maxSubwordSize;
+                    }
+                    compoundForms.add(word);
+                }
+            }
+        }
+        return compoundForms;
     }
 }

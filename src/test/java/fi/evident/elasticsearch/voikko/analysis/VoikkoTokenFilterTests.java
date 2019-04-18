@@ -138,6 +138,24 @@ public class VoikkoTokenFilterTests extends ESTestCase {
         assertTokens("rippi-isälle", token("rippi-isälle", "rippi-isä", 1));
     }
 
+    public void testExpandedCompoundWords() {
+        settings.put("index.analysis.filter.myFilter.expandCompounds", true);
+        assertTokens("isoisälle", token("isoisälle", "isoisä", 1));
+        assertTokens("tekokuusta keinokuuhun",
+                token("tekokuusta", "tekokuu", 1),
+                token("tekokuusta", "tekokuusi", 0),
+                token("tekokuusta", "teko", 0),
+                token("tekokuusta", "kuu", 0),
+                token("tekokuusta", "kuusi", 0),
+                token("keinokuuhun", "keinokuu", 1),
+                token("keinokuuhun", "keino", 0),
+                token("keinokuuhun", "kuu", 0));
+        assertTokens("hammaslääkäri",
+                token("hammaslääkäri", "hammaslääkäri", 1),
+                token("hammaslääkäri", "hammas", 0),
+                token("hammaslääkäri", "lääkäri", 0));
+    }
+
     private static TokenData token(String original, String token, int positionIncrement) {
         return new TokenData(original, token, positionIncrement);
     }

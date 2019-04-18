@@ -27,4 +27,13 @@ final class VoikkoTokenFilterConfiguration {
     /** Words longer than this threshold are ignored */
     int maximumWordSize = 100;
 
+    /** If true, include parts of compound words as alternatives to the whole word */
+    boolean expandCompounds = false;
+
+    /** Subwords (parts of compound words) shorter than this treshold are ignored  */
+    int minimumSubwordSize = 2;
+
+    /** Subwords longer than this treshold are ignored */
+    int maximumSubwordSize = 30;
+
 }
