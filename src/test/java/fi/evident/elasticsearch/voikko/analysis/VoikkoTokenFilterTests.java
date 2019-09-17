@@ -59,7 +59,7 @@ public class VoikkoTokenFilterTests extends ESTestCase {
             return;
         }
 
-        Path morphology = dictDirectory.resolve("2/mor-morpho/voikko-fi_FI.pro");
+        Path morphology = dictDirectory.resolve("5/mor-morpho/mor.vfst");
 
         AccessController.doPrivileged(new PrivilegedAction<Object>() {
             @Override
