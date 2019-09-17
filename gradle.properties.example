@@ -1,0 +1,7 @@
+# Copy this to gradle.properties and set the args for cmd-line and IDEA tests.
+# Note that IDEA does not by default use the JVM configured here for Gradle.
+
+org.gradle.java.home = /path/to/jvm
+
+#systemProp.voikko.path = /path/to/voikko
+systemProp.voikko.dict.path = /path/to/dicts
