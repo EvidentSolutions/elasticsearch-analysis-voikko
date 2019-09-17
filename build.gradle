@@ -23,6 +23,10 @@ apply plugin: 'maven-publish'
 
 version = '0.5.0'
 
+javadoc {
+    options.encoding = 'UTF-8'
+}
+
 dependencies {
     compile 'org.puimula.voikko:libvoikko:4.0.1'
 }
