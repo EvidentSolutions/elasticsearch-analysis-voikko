@@ -47,7 +47,7 @@ public final class VoikkoTokenFilterFactory extends AbstractTokenFilterFactory i
         String language = settings.get("language", "fi_FI");
         String dictionaryPath = settings.get("dictionaryPath");
 
-        for (String dir : settings.getAsArray("libraryPath"))
+        for (String dir : settings.getAsList("libraryPath"))
             Voikko.addLibraryPath(dir);
 
         voikkoPool = new VoikkoPool(language, dictionaryPath);

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.elasticsearch:rest-api-spec:7.3.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.elasticsearch/rest-api-spec/7.3.2/3a1a81de492acf6acfbd2b833f49ce4789923a37/rest-api-spec-7.3.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.elasticsearch/rest-api-spec/7.3.2/43321ca4986ec9528ffd8d1b56e86e87a91f7a4a/rest-api-spec-7.3.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

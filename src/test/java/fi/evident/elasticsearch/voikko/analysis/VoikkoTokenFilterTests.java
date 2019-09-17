@@ -176,7 +176,7 @@ public class VoikkoTokenFilterTests extends ESTestCase {
                     .put(settings.build())
                     .put("index.analysis.analyzer.test.type", "custom")
                     .put("index.analysis.analyzer.test.tokenizer", "finnish")
-                    .putArray("index.analysis.analyzer.test.filter", "lowercase", "myFilter")
+                    .putList("index.analysis.analyzer.test.filter", "lowercase", "myFilter")
                     .build();
 
             return createTestAnalysis(new Index("test", "_na_"), indexSettings, new AnalysisVoikkoPlugin());

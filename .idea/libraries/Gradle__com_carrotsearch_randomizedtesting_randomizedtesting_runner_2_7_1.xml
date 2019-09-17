@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.carrotsearch.randomizedtesting:randomizedtesting-runner:2.7.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.carrotsearch.randomizedtesting/randomizedtesting-runner/2.7.1/e917f4983144c3b969eb7d3648338ecde5e3ba89/randomizedtesting-runner-2.7.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.carrotsearch.randomizedtesting/randomizedtesting-runner/2.7.1/297eb65573826548c173ab16d60ad9ef4435aa5a/randomizedtesting-runner-2.7.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

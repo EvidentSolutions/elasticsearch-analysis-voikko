@@ -8,12 +8,17 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "org.elasticsearch.gradle:build-tools:5.1.1"
+        classpath "org.elasticsearch.gradle:build-tools:7.3.2"
     }
+}
+
+repositories {
+    mavenCentral()
 }
 
 apply plugin: 'idea'
 apply plugin: 'elasticsearch.esplugin'
+apply plugin: 'nebula.maven-publish' // esplugin needs nebula
 apply plugin: 'maven-publish'
 
 version = '0.5.0'
@@ -26,6 +31,8 @@ esplugin {
     description 'Voikko Analysis for Elasticsearch'
     classname 'fi.evident.elasticsearch.voikko.plugin.AnalysisVoikkoPlugin'
     name 'elasticsearch-analysis-voikko'
+    licenseFile rootProject.file('LICENCE')
+    noticeFile rootProject.file('NOTICE')
 }
 
 test {
