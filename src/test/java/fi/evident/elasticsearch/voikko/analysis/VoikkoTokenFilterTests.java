@@ -50,9 +50,9 @@ public class VoikkoTokenFilterTests extends ESTestCase {
 
         Path dictDirectory;
         String dictPath = System.getProperty("voikko.dict.path");
-        if (dictPath != null) {
+        if (isDefined(dictPath)) {
             dictDirectory = PathUtils.get(dictPath);
-        } else if (voikkoPath != null) {
+        } else if (isDefined(voikkoPath)) {
             dictDirectory = PathUtils.get(voikkoPath, "dicts");
         } else {
             assumeTrue("System property 'voikko.path' is not defined, add '-Dvoikko.path=/path/to/voikko'", false);
@@ -145,6 +145,10 @@ public class VoikkoTokenFilterTests extends ESTestCase {
     private void assertTokens(String text, TokenData... expected) {
         List<TokenData> tokens = parse(text);
         assertEquals(asList(expected), tokens);
+    }
+
+    private static boolean isDefined(String value) {
+        return value != null && value.length() != 0;
     }
 
     private List<TokenData> parse(String text) {
