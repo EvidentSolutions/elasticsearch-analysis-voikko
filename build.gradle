@@ -9,6 +9,7 @@ buildscript {
     }
     dependencies {
         classpath "org.elasticsearch.gradle:build-tools:7.3.2"
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.1.0'
     }
 }
 
@@ -20,6 +21,7 @@ apply plugin: 'idea'
 apply plugin: 'elasticsearch.esplugin'
 apply plugin: 'nebula.maven-publish' // esplugin needs nebula
 apply plugin: 'maven-publish'
+apply plugin: 'com.github.johnrengelman.shadow'
 
 version = '0.5.0'
 
@@ -27,8 +29,15 @@ javadoc {
     options.encoding = 'UTF-8'
 }
 
+configurations {
+    shaded
+    compileOnly.extendsFrom(shaded)
+    testCompile.extendsFrom(shaded)
+}
+
 dependencies {
-    compile 'org.puimula.voikko:libvoikko:4.1.1'
+    shaded 'org.puimula.voikko:libvoikko:4.1.1'
+    shaded 'com.sun.jna:jna:3.0.9'
 }
 
 esplugin {
@@ -58,6 +67,11 @@ publishing {
             artifact bundlePlugin
         }
     }
+}
+
+shadowJar {
+    configurations = [project.configurations.shaded]
+    relocate 'com.sun.jna', 'voikko.com.sun.jna'
 }
 
 // TODO: temporary workaround until it's fixed in elasticsearch
