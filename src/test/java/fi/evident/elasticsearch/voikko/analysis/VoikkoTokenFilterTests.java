@@ -82,7 +82,7 @@ public class VoikkoTokenFilterTests extends ESTestCase {
     public void testDefaultSettings() throws Exception {
         assertTokens("Testaan voikon analyysiä tällä tavalla yksinkertaisesti.",
                 token("Testaan", "testata", 1),
-                token("voikon", "voikko", 1),
+                token("voikon", "Voikko", 1),
                 token("analyysiä", "analyysi", 1),
                 token("tällä", "tämä", 1),
                 token("tavalla", "tapa", 1),
@@ -103,8 +103,8 @@ public class VoikkoTokenFilterTests extends ESTestCase {
 
         assertTokens("Testaan voikon analyysiä tällä tavalla yksinkertaisesti.",
                 token("Testaan", "testata", 1),
-                token("voikon", "voikko", 1),
-                token("voikon", "Voikko", 0),
+                token("voikon", "Voikko", 1),
+                token("voikon", "voikko", 0),
                 token("analyysiä", "analyysi", 1),
                 token("tällä", "tämä", 1),
                 token("tavalla", "tapa", 1),
@@ -118,8 +118,8 @@ public class VoikkoTokenFilterTests extends ESTestCase {
 
         assertTokens("Testaan voikon analyysiä tällä tavalla yksinkertaisesti.",
                 token("Testaan", "testata", 1),
-                token("voikon", "voikko", 1),
-                token("voikon", "Voikko", 0),
+                token("voikon", "Voikko", 1),
+                token("voikon", "voikko", 0),
                 token("analyysiä", "analyysi", 1),
                 token("tällä", "tämä", 1),
                 token("tavalla", "tapa", 1),
