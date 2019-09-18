@@ -24,13 +24,14 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Gradle: org.puimula.voikko:libvoikko:4.1.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.elasticsearch:elasticsearch:7.3.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.locationtech.spatial4j:spatial4j:0.7" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.locationtech.jts:jts-core:1.15.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.logging.log4j:log4j-api:2.11.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.logging.log4j:log4j-core:2.11.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.elasticsearch:jna:4.5.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.puimula.voikko:libvoikko:4.1.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.sun.jna:jna:3.0.9" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.elasticsearch:elasticsearch-x-content:7.3.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.elasticsearch:elasticsearch-cli:7.3.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.elasticsearch:elasticsearch-core:7.3.2" level="project" />
@@ -55,6 +56,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Gradle: joda-time:joda-time:2.10.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: com.tdunning:t-digest:3.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.hdrhistogram:HdrHistogram:2.1.9" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: net.java.dev.jna:jna:4.2.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.yaml:snakeyaml:1.17" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.8.11" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: com.fasterxml.jackson.dataformat:jackson-dataformat-smile:2.8.11" level="project" />

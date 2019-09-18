@@ -24,6 +24,8 @@ import org.elasticsearch.index.analysis.AbstractTokenFilterFactory;
 import org.puimula.libvoikko.Voikko;
 
 import java.io.Closeable;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
 
 public final class VoikkoTokenFilterFactory extends AbstractTokenFilterFactory implements Closeable {
 
@@ -48,7 +50,10 @@ public final class VoikkoTokenFilterFactory extends AbstractTokenFilterFactory i
         String dictionaryPath = settings.get("dictionaryPath");
 
         for (String dir : settings.getAsList("libraryPath"))
-            Voikko.addLibraryPath(dir);
+            AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
+                Voikko.addLibraryPath(dir);
+                return null;
+            });
 
         voikkoPool = new VoikkoPool(language, dictionaryPath);
         voikkoPool.setMaxSize(settings.getAsInt("poolMaxSize", 10));
