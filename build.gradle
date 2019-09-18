@@ -28,7 +28,7 @@ javadoc {
 }
 
 dependencies {
-    compile 'org.puimula.voikko:libvoikko:4.0.1'
+    compile 'org.puimula.voikko:libvoikko:4.1.1'
 }
 
 esplugin {

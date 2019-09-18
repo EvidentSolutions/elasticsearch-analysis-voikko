@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.puimula.voikko:libvoikko:4.1.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.puimula.voikko/libvoikko/4.1.1/d0061d7970214614b32e92ec016aa59333331b24/libvoikko-4.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.puimula.voikko/libvoikko/4.1.1/1cf9c2a966f4a8958ffd89017a5b2499d16c5790/libvoikko-4.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
