@@ -21,7 +21,7 @@ apply plugin: 'elasticsearch.esplugin'
 apply plugin: 'nebula.maven-publish' // esplugin needs nebula
 apply plugin: 'maven-publish'
 
-version = '0.5.0'
+version = '0.6.0'
 
 javadoc {
     options.encoding = 'UTF-8'

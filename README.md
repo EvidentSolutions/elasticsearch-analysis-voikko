@@ -6,6 +6,7 @@ The Voikko Analysis plugin provides Finnish language analysis using [Voikko](htt
 
 | Plugin version | Elasticsearch version |
 | -------------- | ----------------------|
+| [0.6.0](https://github.com/EvidentSolutions/elasticsearch-analysis-voikko/blob/v0.6.0/README.md) | 7.3.2 |
 | [0.5.0](https://github.com/EvidentSolutions/elasticsearch-analysis-voikko/blob/v0.5.0/README.md) | 5.1.1 |
 | [0.4.0](https://github.com/EvidentSolutions/elasticsearch-analysis-voikko/blob/v0.4.0/README.md) | 2.2.1 |
 | [0.3.0](https://github.com/EvidentSolutions/elasticsearch-analysis-voikko/blob/v0.3.0/README.md) | 1.5.2 |
@@ -30,7 +31,7 @@ Unzip this into Voikko's dictionary directory (e.g. `/usr/lib/voikko` in Debian)
 Finally, to install the plugin, run: 
 
 ```
-bin/elasticsearch-plugin install https://github.com/EvidentSolutions/elasticsearch-analysis-voikko/releases/download/v0.5.0/elasticsearch-analysis-voikko-0.5.0.zip
+bin/elasticsearch-plugin install https://github.com/EvidentSolutions/elasticsearch-analysis-voikko/releases/download/v0.6.0/elasticsearch-analysis-voikko-0.6.0.zip
 ```
 
 ### Security policy

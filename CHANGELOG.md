@@ -1,3 +1,7 @@
+## 0.6.0 (2019-09-18)
+
+  - New version that is compatible with ES 7.3.2.
+
 ## 0.5.0 (2017-01-16)
 
   - New version that is compatible with ES 5.1.1.
