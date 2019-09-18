@@ -61,6 +61,7 @@ public class VoikkoTokenFilterTests extends ESTestCase {
 
         Path morphology = dictDirectory.resolve("5/mor-morpho/mor.vfst");
 
+        //noinspection Convert2Diamond
         AccessController.doPrivileged(new PrivilegedAction<Object>() {
             @Override
             @SuppressForbidden(reason = "We really want to access real file system")
@@ -79,7 +80,7 @@ public class VoikkoTokenFilterTests extends ESTestCase {
         settings.put("index.analysis.filter.myFilter.dictionaryPath", dictDirectory.toAbsolutePath());
     }
 
-    public void testDefaultSettings() throws Exception {
+    public void testDefaultSettings() {
         assertTokens("Testaan voikon analyysiä tällä tavalla yksinkertaisesti.",
                 token("Testaan", "testata", 1),
                 token("voikon", "Voikko", 1),
@@ -89,7 +90,7 @@ public class VoikkoTokenFilterTests extends ESTestCase {
                 token("yksinkertaisesti", "yksinkertainen", 1));
     }
 
-    public void testUnknownWord() throws Exception {
+    public void testUnknownWord() {
         assertTokens("Mitenkä foobarbaz edellinen sana tunnistetaan?",
                 token("Mitenkä", "miten", 1),
                 token("foobarbaz", "foobarbaz", 1),
@@ -98,7 +99,7 @@ public class VoikkoTokenFilterTests extends ESTestCase {
                 token("tunnistetaan", "tunnistaa", 1));
     }
 
-    public void testAllVariations() throws Exception {
+    public void testAllVariations() {
         settings.put("index.analysis.filter.myFilter.analyzeAll", true);
 
         assertTokens("Testaan voikon analyysiä tällä tavalla yksinkertaisesti.",
@@ -112,7 +113,7 @@ public class VoikkoTokenFilterTests extends ESTestCase {
                 token("yksinkertaisesti", "yksinkertainen", 0));
     }
 
-    public void testNonSeparatedTokens() throws Exception {
+    public void testNonSeparatedTokens() {
         settings.put("index.analysis.filter.myFilter.analyzeAll", true);
         settings.put("index.analysis.filter.myFilter.separateTokens", false);
 
@@ -191,7 +192,7 @@ public class VoikkoTokenFilterTests extends ESTestCase {
         private final String token;
         private final int positionIncrement;
 
-        public TokenData(String original, String token, int positionIncrement) {
+        TokenData(String original, String token, int positionIncrement) {
             this.original = original;
             this.token = token;
             this.positionIncrement = positionIncrement;

@@ -41,7 +41,7 @@ final class VoikkoTokenFilter extends TokenFilter {
     private final CharTermAttribute charTermAttribute = addAttribute(CharTermAttribute.class);
     private final PositionIncrementAttribute positionIncrementAttribute = addAttribute(PositionIncrementAttribute.class);
 
-    private final Deque<String> alternatives = new ArrayDeque<String>();
+    private final Deque<String> alternatives = new ArrayDeque<>();
     private final AnalysisCache analysisCache;
 
     private static final Pattern VALID_WORD_PATTERN = Pattern.compile("[a-zA-ZåäöÅÄÖ-]+");
@@ -79,7 +79,7 @@ final class VoikkoTokenFilter extends TokenFilter {
     }
 
     private void analyzeToken() {
-        if (!isCandidateForAnalyzation(charTermAttribute))
+        if (!isCandidateForAnalysis(charTermAttribute))
             return;
 
         List<String> baseForms = analyze(charTermAttribute);
@@ -91,8 +91,7 @@ final class VoikkoTokenFilter extends TokenFilter {
         if (cfg.analyzeAll && baseForms.size() > 1) {
             current = captureState();
 
-            for (String baseForm : baseForms.subList(1, baseForms.size()))
-                alternatives.add(baseForm);
+            alternatives.addAll(baseForms.subList(1, baseForms.size()));
         }
     }
 
@@ -108,7 +107,7 @@ final class VoikkoTokenFilter extends TokenFilter {
 
     private List<String> analyzeUncached(String word) {
         List<Analysis> results = voikko.analyze(word);
-        List<String> baseForms = new ArrayList<String>(results.size());
+        List<String> baseForms = new ArrayList<>(results.size());
 
         for (Analysis result : results) {
             String baseForm = result.get("BASEFORM");
@@ -125,7 +124,7 @@ final class VoikkoTokenFilter extends TokenFilter {
         charTermAttribute.setEmpty().append(token);
     }
 
-    private boolean isCandidateForAnalyzation(CharSequence word) {
+    private boolean isCandidateForAnalysis(CharSequence word) {
         return word.length() >= cfg.minimumWordSize && word.length() <= cfg.maximumWordSize && VALID_WORD_PATTERN.matcher(word).matches();
     }
 }

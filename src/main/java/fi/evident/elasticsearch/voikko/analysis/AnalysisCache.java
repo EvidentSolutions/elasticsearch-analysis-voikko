@@ -24,11 +24,11 @@ final class AnalysisCache {
     private final LRUCache<String, List<String>> cache;
     private final ReentrantLock lock = new ReentrantLock(true);
 
-    public AnalysisCache(int cacheSize) {
-        cache = new LRUCache<String, List<String>>(cacheSize);
+    AnalysisCache(int cacheSize) {
+        cache = new LRUCache<>(cacheSize);
     }
 
-    public List<String> get(String word) {
+    List<String> get(String word) {
         // Note that it seems that we could use a read/write -lock here and grab only the read-lock
         // when retrieving stuff from cache, but this will not work because the cache uses access-order,
         // meaning that every read will actually mutate the cache.
@@ -40,7 +40,7 @@ final class AnalysisCache {
         }
     }
 
-    public void put(String word, List<String> result) {
+    void put(String word, List<String> result) {
         lock.lock();
         try {
             cache.put(word, result);

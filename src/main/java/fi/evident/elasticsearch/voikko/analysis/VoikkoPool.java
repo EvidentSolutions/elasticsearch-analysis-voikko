@@ -33,15 +33,15 @@ final class VoikkoPool {
     private final String dictionaryPath;
     private int maxSize = 10;
     private int size = 0;
-    private final List<Voikko> freeInstances = new ArrayList<Voikko>();
+    private final List<Voikko> freeInstances = new ArrayList<>();
     private boolean closed = false;
 
-    public VoikkoPool(String language, String dictionaryPath) {
+    VoikkoPool(String language, String dictionaryPath) {
         this.language = language;
         this.dictionaryPath = dictionaryPath;
     }
 
-    public synchronized Voikko takeVoikko() throws InterruptedException {
+    synchronized Voikko takeVoikko() throws InterruptedException {
         while (true) {
             if (closed)
                 throw new IllegalStateException("Can't acquire Voikko from closed pool.");
@@ -59,7 +59,7 @@ final class VoikkoPool {
         }
     }
 
-    public synchronized void release(Voikko voikko) {
+    synchronized void release(Voikko voikko) {
         if (voikko == null) throw new IllegalArgumentException("null voikko");
 
         if (closed) {
@@ -70,7 +70,7 @@ final class VoikkoPool {
         }
     }
 
-    public synchronized void close() {
+    synchronized void close() {
         if (closed)
             return;
 
@@ -84,7 +84,7 @@ final class VoikkoPool {
         notifyAll();
     }
 
-    public void setMaxSize(int maxSize) {
+    void setMaxSize(int maxSize) {
         this.maxSize = maxSize;
     }
 

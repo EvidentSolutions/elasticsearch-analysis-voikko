@@ -17,7 +17,7 @@
 
 package fi.evident.elasticsearch.voikko.analysis;
 
-public class VoikkoNativeLibraryNotFoundException extends RuntimeException {
+class VoikkoNativeLibraryNotFoundException extends RuntimeException {
     VoikkoNativeLibraryNotFoundException(UnsatisfiedLinkError e) {
         super("failed to link native libvoikko - install it in system library path or specify 'libraryPath' configuration property", e);
     }

@@ -23,7 +23,7 @@ import org.apache.lucene.analysis.util.CharTokenizer;
  * This is almost same as {@link org.apache.lucene.analysis.core.LetterTokenizer}, but
  * treats hyphen as a letter as well, since hyphens can be part of words. (e.g. "rippi-isä").
  */
-public class FinnishTokenizer extends CharTokenizer {
+class FinnishTokenizer extends CharTokenizer {
 
     @Override
     protected boolean isTokenChar(int c) {
