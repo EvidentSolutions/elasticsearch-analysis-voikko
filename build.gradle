@@ -40,7 +40,8 @@ esplugin {
 }
 
 test {
-    systemProperty 'voikko.path', System.getProperty('voikko.path')
+    if (System.getProperty('voikko.path') != null)
+        systemProperty 'voikko.path', System.getProperty('voikko.path')
 
     if (System.getProperty('voikko.dict.path') != null)
         systemProperty 'voikko.dict.path', System.getProperty('voikko.dict.path')
