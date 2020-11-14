@@ -1,7 +1,6 @@
 *~
-.idea/workspace.xml
+.idea
 .gradle
-gradle.properties
 build
 .DS_Store
 .local-unspecified-test-execution-times.log

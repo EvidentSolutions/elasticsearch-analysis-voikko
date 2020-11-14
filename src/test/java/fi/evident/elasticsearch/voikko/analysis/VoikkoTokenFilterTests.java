@@ -1,17 +1,20 @@
 /*
- * Copyright 2013-2017 Evident Solutions Oy
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * Licensed to Elasticsearch under one or more contributor
+ * license agreements. See the NOTICE file distributed with
+ * this work for additional information regarding copyright
+ * ownership. Elasticsearch licenses this file to you under
+ * the Apache License, Version 2.0 (the "License"); you may
+ * not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 
 package fi.evident.elasticsearch.voikko.analysis;
@@ -58,7 +61,6 @@ public class VoikkoTokenFilterTests extends ESTestCase {
             assumeTrue("System property 'voikko.path' is not defined, add '-Dvoikko.path=/path/to/voikko'", false);
             return;
         }
-
         Path morphology = dictDirectory.resolve("5/mor-morpho/mor.vfst");
 
         //noinspection Convert2Diamond
@@ -83,7 +85,7 @@ public class VoikkoTokenFilterTests extends ESTestCase {
     public void testDefaultSettings() {
         assertTokens("Testaan voikon analyysiä tällä tavalla yksinkertaisesti.",
                 token("Testaan", "testata", 1),
-                token("voikon", "Voikko", 1),
+                token("voikon", "voikko", 1),
                 token("analyysiä", "analyysi", 1),
                 token("tällä", "tämä", 1),
                 token("tavalla", "tapa", 1),
@@ -104,8 +106,8 @@ public class VoikkoTokenFilterTests extends ESTestCase {
 
         assertTokens("Testaan voikon analyysiä tällä tavalla yksinkertaisesti.",
                 token("Testaan", "testata", 1),
-                token("voikon", "Voikko", 1),
-                token("voikon", "voikko", 0),
+                token("voikon", "voikko", 1),
+                token("voikon", "Voikko", 0),
                 token("analyysiä", "analyysi", 1),
                 token("tällä", "tämä", 1),
                 token("tavalla", "tapa", 1),
@@ -119,8 +121,8 @@ public class VoikkoTokenFilterTests extends ESTestCase {
 
         assertTokens("Testaan voikon analyysiä tällä tavalla yksinkertaisesti.",
                 token("Testaan", "testata", 1),
-                token("voikon", "Voikko", 1),
-                token("voikon", "voikko", 0),
+                token("voikon", "voikko", 1),
+                token("voikon", "Voikko", 0),
                 token("analyysiä", "analyysi", 1),
                 token("tällä", "tämä", 1),
                 token("tavalla", "tapa", 1),
@@ -211,8 +213,8 @@ public class VoikkoTokenFilterTests extends ESTestCase {
             TokenData tokenData = (TokenData) obj;
 
             return positionIncrement == tokenData.positionIncrement
-                && original.equals(tokenData.original)
-                && token.equals(tokenData.token);
+                    && original.equals(tokenData.original)
+                    && token.equals(tokenData.token);
         }
 
         @Override

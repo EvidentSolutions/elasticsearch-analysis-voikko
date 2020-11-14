@@ -4,7 +4,8 @@ The Voikko Analysis plugin provides Finnish language analysis using [Voikko](htt
 
 ## Fork for 7.10.0
 
-This is a fork by someone who know very little about ElasticSearch and nothing about Gradle
+This is a fork by someone who knows very little about ElasticSearch and close to nothing about Gradle. The license headers on all Java files have been modified, otherwise the Gradle esplugin complains about 'Unapproved licenses'.
+In order to run the tests you must have a valid installation of libvoikko and of the required dictionaries: See `gradle.properties` for more details. `./gradlew clean build` will build version 7.10.0 of this plugin in the `build/distributions` folder.
 
 ## Supported versions
 
