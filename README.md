@@ -2,6 +2,10 @@
 
 The Voikko Analysis plugin provides Finnish language analysis using [Voikko](http://voikko.puimula.org/).
 
+## Fork for 7.10.0
+
+This is a fork by someone who know very little about ElasticSearch and nothing about Gradle
+
 ## Supported versions
 
 | Plugin version | Elasticsearch version |
