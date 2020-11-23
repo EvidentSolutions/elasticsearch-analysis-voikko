@@ -1,3 +1,5 @@
+// build with ex: ./gradlew clean build -Dvoikko.path=/usr/lib64 -Dvoikko.dict.path=/usr/lib/voikko/
+
 group = 'fi.evident.elasticsearch'
 version = '7.10.0'
 
@@ -56,3 +58,4 @@ thirdPartyAudit.enabled = false
 testingConventions.enabled = false
 validateNebulaPom.enabled = false
 loggerUsageCheck.enabled = false
+licenseHeaders.enabled = false
