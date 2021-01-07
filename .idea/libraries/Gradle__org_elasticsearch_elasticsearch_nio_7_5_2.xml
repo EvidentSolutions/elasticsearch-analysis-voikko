@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.elasticsearch:elasticsearch-nio:7.5.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.elasticsearch/elasticsearch-nio/7.5.2/610ba2830b995da3c4872b7e63de93735800da6f/elasticsearch-nio-7.5.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.elasticsearch/elasticsearch-nio/7.5.2/81bf87dc1941f45e2865357b1fa242fdccda71c/elasticsearch-nio-7.5.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
