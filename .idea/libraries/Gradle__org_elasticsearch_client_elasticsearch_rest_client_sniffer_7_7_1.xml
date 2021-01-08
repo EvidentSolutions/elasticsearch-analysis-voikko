@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.elasticsearch.client:elasticsearch-rest-client-sniffer:7.7.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.elasticsearch.client/elasticsearch-rest-client-sniffer/7.7.1/b65e9de5cceec55abd42031e2ecd35e8ae5671f6/elasticsearch-rest-client-sniffer-7.7.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.elasticsearch.client/elasticsearch-rest-client-sniffer/7.7.1/55c0ee0bac9bc98fb5f2a17b82184ffd576e3827/elasticsearch-rest-client-sniffer-7.7.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

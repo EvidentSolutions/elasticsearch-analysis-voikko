@@ -8,7 +8,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "org.elasticsearch.gradle:build-tools:7.7.0"
+        classpath "org.elasticsearch.gradle:build-tools:7.7.1"
     }
 }
 
@@ -18,8 +18,6 @@ repositories {
 
 apply plugin: 'idea'
 apply plugin: 'elasticsearch.esplugin'
-apply plugin: 'nebula.maven-publish' // esplugin needs nebula
-apply plugin: 'maven-publish'
 
 group = 'fi.evident.elasticsearch'
 version = '0.6.0'
@@ -48,50 +46,8 @@ test {
         systemProperty 'voikko.dict.path', System.getProperty('voikko.dict.path')
 }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from components.java
-            artifact javadocJar
-            artifact sourcesJar
-            artifact bundlePlugin
-
-            pom {
-                name = 'Voikko Analysis for Elasticsearch'
-                description = 'The Voikko Analysis plugin provides Finnish language analysis using Voikko.'
-                url = 'https://github.com/EvidentSolutions/elasticsearch-analysis-voikko'
-
-                scm {
-                    connection = 'scm:git:git://github.com/EvidentSolutions/elasticsearch-analysis-voikko.git'
-                    developerConnection = 'scm:git:ssh://github.com/EvidentSolutions/elasticsearch-analysis-voikko.git'
-                    url = 'https://github.com/EvidentSolutions/elasticsearch-analysis-voikko'
-                }
-            }
-        }
-
-        // add license information to generated poms
-        all {
-            pom.withXml { XmlProvider xml ->
-                Node node = xml.asNode()
-
-                Node license = node.appendNode('licenses').appendNode('license')
-                license.appendNode('name', 'The Apache License, Version 2.0')
-                license.appendNode('url', 'http://www.apache.org/licenses/LICENSE-2.0.txt')
-
-                def developers = node.appendNode('developers')
-
-                Node dev1 = developers.appendNode('developer')
-                dev1.appendNode('name', 'Juha Komulainen')
-                dev1.appendNode('url', 'http://www.evident.fi')
-
-                Node dev2 = developers.appendNode('developer')
-                dev2.appendNode('name', 'Martti Soininen')
-                dev2.appendNode('url', 'http://www.evident.fi')
-            }
-        }
-    }
-}
-
 // TODO: temporary workaround until it's fixed in elasticsearch
 thirdPartyAudit.enabled = false
 testingConventions.enabled = false
+licenseHeaders.enabled = false
+validateNebulaPom.enabled = false
