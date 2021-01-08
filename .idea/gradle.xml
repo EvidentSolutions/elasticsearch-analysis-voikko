@@ -9,7 +9,7 @@
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleHome" value="/usr/local/Cellar/gradle/4.6/libexec" />
-        <option name="gradleJvm" value="adopt-openjdk-13" />
+        <option name="gradleJvm" value="adopt-openjdk-14" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
