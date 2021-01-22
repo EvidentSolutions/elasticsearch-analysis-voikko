@@ -1,3 +1,9 @@
+# DEPRECATED
+
+This plugin has been superceded by [elasticsearch-analysis-raudikko](https://github.com/EvidentSolutions/elasticsearch-analysis-raudikko),
+which is fully compatible with this plugin, but does not need native libraries, special permissions and extra configuration to install.
+It is also about two times faster than this plugin.
+
 # Voikko Analysis for Elasticsearch
 
 The Voikko Analysis plugin provides Finnish language analysis using [Voikko](http://voikko.puimula.org/).
